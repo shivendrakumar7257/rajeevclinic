@@ -28,3 +28,6 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project architecture
+- Keep public content in `src/data/*.ts`, shared site chrome and reusable UI in `src/components/`, and pages in TanStack Start file-based routes; this keeps clinic facts editable and navigation consistent.
