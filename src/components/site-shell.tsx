@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, CalendarDays, ChevronDown, Clock3, Leaf, Menu, MessageCircle, Phone, ShoppingBag, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { clinicContacts, clinicEmail, footerLinks, mainPhone, navLinks, whatsappPhone } from "@/data/clinic";
 
-export function AppointmentButton({ children = "Book appointment", className = "" }: { children?: React.ReactNode; className?: string }) {
+export function AppointmentButton({ children = "Book appointment", className = "" }: { children?: ReactNode; className?: string }) {
   return <Button asChild className={`bg-amber text-amber-foreground shadow-sm transition-transform hover:-translate-y-0.5 hover:bg-amber/90 ${className}`}><Link to="/appointments"><CalendarDays />{children}</Link></Button>;
 }
 
@@ -40,10 +40,10 @@ export function MobileActionBar() {
 
 export function FloatingWhatsApp() { return <a href={`https://wa.me/${whatsappPhone}`} target="_blank" rel="noreferrer" className="fixed bottom-6 right-6 z-40 hidden size-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-transform hover:scale-105 md:flex" aria-label="Chat with the clinic on WhatsApp" title="Chat on WhatsApp"><MessageCircle size={23} /></a>; }
 
-export function SiteFrame({ children }: { children: React.ReactNode }) { return <><SiteHeader /><main>{children}</main><SiteFooter /><MobileActionBar /><FloatingWhatsApp /></>; }
+export function SiteFrame({ children }: { children: ReactNode }) { return <><SiteHeader /><main>{children}</main><SiteFooter /><MobileActionBar /><FloatingWhatsApp /></>; }
 
 export function SectionHeading({ eyebrow, title, description, align = "center" }: { eyebrow?: string; title: string; description?: string; align?: "center" | "left" }) { return <div className={`mb-8 max-w-2xl ${align === "center" ? "mx-auto text-center" : "text-left"}`}>{eyebrow && <p className="mb-3 text-xs font-semibold uppercase tracking-[0.12em] text-primary">{eyebrow}</p>}<h2 className="font-display text-2xl font-semibold leading-tight text-foreground sm:text-3xl">{title}</h2>{description && <p className="mt-3 text-sm leading-7 text-muted-foreground">{description}</p>}</div>; }
 
-export function EyebrowLink({ to, children }: { to: string; children: React.ReactNode }) { return <Link to={to} className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">{children}<ArrowRight size={16} /></Link>; }
+export function EyebrowLink({ to, children }: { to: string; children: ReactNode }) { return <Link to={to} className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">{children}<ArrowRight size={16} /></Link>; }
 
 export function AvailabilityNote() { return <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-2 text-xs text-muted-foreground"><Clock3 size={14} className="text-primary" />Mon–Sun · 10:00 AM–8:00 PM</div>; }
