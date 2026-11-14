@@ -1,0 +1,49 @@
+import { useState, type ReactNode } from "react";
+import { Link } from "@tanstack/react-router";
+import { ArrowRight, CalendarDays, ChevronDown, Clock3, Leaf, Menu, MessageCircle, Phone, ShoppingBag, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { clinicContacts, clinicEmail, footerLinks, mainPhone, navLinks, whatsappPhone } from "@/data/clinic";
+
+export function AppointmentButton({ children = "Book appointment", className = "" }: { children?: ReactNode; className?: string }) {
+  return <Button asChild className={`bg-amber text-amber-foreground shadow-sm transition-transform hover:-translate-y-0.5 hover:bg-amber/90 ${className}`}><Link to="/appointments"><CalendarDays />{children}</Link></Button>;
+}
+
+export function SiteHeader() {
+  const [city, setCity] = useState("Our clinics");
+  return <>
+    <div className="hidden border-b border-border bg-primary-dark text-primary-foreground md:block">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2 text-xs">
+        <span className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-amber" /> Clinics in Ranchi · Patna · Kolkata · Delhi</span>
+        <div className="flex items-center gap-5"><a className="inline-flex items-center gap-1.5 hover:text-amber" href={`tel:${mainPhone.replaceAll(" ", "")}`}><Phone size={13} />{mainPhone}</a><a className="hover:text-amber" href="https://shop.rajeevclinic.com">Buy Autism Book</a><Link className="hover:text-amber" to="/she-child-care">She &amp; Child Care</Link></div>
+      </div>
+    </div>
+    <header className="sticky top-0 z-40 border-b border-border/70 bg-background/95 backdrop-blur-md">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 md:px-6">
+        <Link to="/" className="flex min-w-0 items-center gap-2.5" aria-label="Dr. Rajeev's Homeopathy Clinic home"><span className="grid size-10 shrink-0 place-items-center rounded-full bg-primary text-primary-foreground"><Leaf size={21} /></span><span className="min-w-0"><span className="block truncate font-display text-sm font-semibold leading-tight text-foreground sm:text-base">Dr. Rajeev's</span><span className="block text-[10px] leading-tight text-muted-foreground sm:text-xs">Homeopathy Clinic</span></span></Link>
+        <nav className="hidden items-center gap-4 xl:flex" aria-label="Main navigation">{navLinks.map((item) => <Link key={item.to} to={item.to} className="whitespace-nowrap text-xs font-medium text-foreground/80 transition-colors hover:text-primary">{item.label}</Link>)}</nav>
+        <div className="hidden items-center gap-2 xl:flex"><label className="relative"><span className="sr-only">Choose clinic city</span><select value={city} onChange={(event) => setCity(event.target.value)} className="h-9 max-w-32 appearance-none rounded-md border border-input bg-background pl-3 pr-8 text-xs text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">{["Our clinics", ...clinicContacts.map((clinic) => clinic.city)].map((name) => <option key={name}>{name}</option>)}</select><ChevronDown size={14} className="pointer-events-none absolute right-2.5 top-2.5 text-muted-foreground" /></label><Button asChild variant="outline" size="sm" className="whitespace-nowrap"><a href="https://shop.rajeevclinic.com"><ShoppingBag />Shop medicine</a></Button><AppointmentButton className="whitespace-nowrap" /></div>
+        <Button variant="ghost" size="sm" className="hidden text-xs lg:inline-flex xl:hidden" aria-label="Language selector placeholder">EN <span className="text-muted-foreground">/ HI</span></Button>
+        <Sheet><SheetTrigger asChild><Button variant="outline" size="icon" className="xl:hidden" aria-label="Open navigation"><Menu /></Button></SheetTrigger><SheetContent side="right" className="flex w-[min(90vw,380px)] flex-col overflow-y-auto"><SheetHeader className="border-b border-border pb-5 text-left"><SheetTitle className="flex items-center gap-2 font-display"><Leaf className="text-primary" />Dr. Rajeev's Homeopathy Clinic</SheetTitle></SheetHeader><nav className="flex flex-col py-3" aria-label="Mobile navigation">{navLinks.map((item) => <SheetClose asChild key={item.to}><Link to={item.to} className="border-b border-border/70 py-3.5 text-sm font-medium text-foreground hover:text-primary">{item.label}</Link></SheetClose>)}<a href="https://shop.rajeevclinic.com" className="border-b border-border/70 py-3.5 text-sm font-medium">Shop medicine</a><SheetClose asChild><Link to="/she-child-care" className="border-b border-border/70 py-3.5 text-sm font-medium">She &amp; Child Care</Link></SheetClose></nav><div className="mt-auto space-y-4 pt-6"><Button variant="ghost" className="w-full justify-start">English <span className="ml-auto text-muted-foreground">Hindi · coming soon</span></Button><SheetClose asChild><AppointmentButton className="w-full" /></SheetClose><a href={`tel:${mainPhone.replaceAll(" ", "")}`} className="flex items-center justify-center gap-2 text-sm text-primary"><Phone size={16} />Call {mainPhone}</a></div></SheetContent></Sheet>
+      </div>
+    </header>
+  </>;
+}
+
+export function SiteFooter() {
+  return <footer className="bg-primary-dark text-primary-foreground"><div className="mx-auto max-w-7xl px-5 pb-24 pt-14 md:px-8 md:pb-10"><div className="grid gap-10 border-b border-primary-foreground/15 pb-10 md:grid-cols-[1.4fr_1fr_1fr]"><div><Link to="/" className="inline-flex items-center gap-2.5"><span className="grid size-10 place-items-center rounded-full bg-primary-foreground/10"><Leaf /></span><span className="font-display text-lg font-semibold">Dr. Rajeev's Homeopathy Clinic</span></Link><p className="mt-4 max-w-sm text-sm leading-7 text-primary-foreground/75">Personalised homeopathic consultations, with clinic and online options across four cities.</p><p className="mt-4 text-xs text-primary-foreground/65">ABHI HOMEO HALL</p><a href={`mailto:${clinicEmail}`} className="mt-3 inline-block text-sm underline decoration-primary-foreground/40 underline-offset-4">{clinicEmail}</a></div><div><h2 className="font-display text-sm font-semibold">Our clinics</h2><div className="mt-4 grid grid-cols-2 gap-x-4 gap-y-4">{clinicContacts.map((clinic) => <div key={clinic.city}><p className="text-sm font-medium">{clinic.city}</p><a href={`tel:${clinic.phone.replaceAll(" ", "")}`} className="mt-1 inline-block text-xs text-primary-foreground/70">{clinic.phone}</a></div>)}</div></div><div><h2 className="font-display text-sm font-semibold">Explore</h2><div className="mt-4 grid grid-cols-2 gap-x-3 gap-y-3">{footerLinks.map((item) => <Link key={item.label} to={item.to} className="text-xs text-primary-foreground/75 hover:text-primary-foreground">{item.label}</Link>)}</div></div></div><div className="flex flex-col justify-between gap-3 pt-5 text-xs text-primary-foreground/65 sm:flex-row"><span>© {new Date().getFullYear()} Dr. Rajeev's Homeopathy Clinic. All rights reserved.</span><span>Information on this website is educational and not a substitute for professional medical advice.</span></div></div></footer>;
+}
+
+export function MobileActionBar() {
+  return <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-3 border-t border-border bg-background/95 p-2 shadow-[0_-8px_24px_-16px_var(--color-primary)] backdrop-blur-md md:hidden"><a href={`tel:${mainPhone.replaceAll(" ", "")}`} className="flex min-h-12 flex-col items-center justify-center gap-1 text-[10px] font-medium text-primary"><Phone size={17} />Call</a><a href={`https://wa.me/${whatsappPhone}`} target="_blank" rel="noreferrer" className="flex min-h-12 flex-col items-center justify-center gap-1 text-[10px] font-medium text-primary"><MessageCircle size={17} />WhatsApp</a><Link to="/appointments" className="flex min-h-12 flex-col items-center justify-center gap-1 text-[10px] font-semibold text-primary"><CalendarDays size={17} />Appointment</Link></div>;
+}
+
+export function FloatingWhatsApp() { return <a href={`https://wa.me/${whatsappPhone}`} target="_blank" rel="noreferrer" className="fixed bottom-6 right-6 z-40 hidden size-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-transform hover:scale-105 md:flex" aria-label="Chat with the clinic on WhatsApp" title="Chat on WhatsApp"><MessageCircle size={23} /></a>; }
+
+export function SiteFrame({ children }: { children: ReactNode }) { return <><SiteHeader /><main>{children}</main><SiteFooter /><MobileActionBar /><FloatingWhatsApp /></>; }
+
+export function SectionHeading({ eyebrow, title, description, align = "center" }: { eyebrow?: string; title: string; description?: string; align?: "center" | "left" }) { return <div className={`mb-8 max-w-2xl ${align === "center" ? "mx-auto text-center" : "text-left"}`}>{eyebrow && <p className="mb-3 text-xs font-semibold uppercase tracking-[0.12em] text-primary">{eyebrow}</p>}<h2 className="font-display text-2xl font-semibold leading-tight text-foreground sm:text-3xl">{title}</h2>{description && <p className="mt-3 text-sm leading-7 text-muted-foreground">{description}</p>}</div>; }
+
+export function EyebrowLink({ to, children }: { to: string; children: ReactNode }) { return <Link to={to} className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">{children}<ArrowRight size={16} /></Link>; }
+
+export function AvailabilityNote() { return <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-2 text-xs text-muted-foreground"><Clock3 size={14} className="text-primary" />Mon–Sun · 10:00 AM–8:00 PM</div>; }
