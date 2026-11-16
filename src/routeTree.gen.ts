@@ -10,33 +10,232 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as ActivitiesRouteImport } from './routes/activities'
+import { Route as AppointmentsRouteImport } from './routes/appointments'
+import { Route as AutismBookRouteImport } from './routes/autism-book'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as HomeopathyRouteImport } from './routes/homeopathy'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as RefundRouteImport } from './routes/refund'
+import { Route as ResultsRouteImport } from './routes/results'
+import { Route as SheChildCareRouteImport } from './routes/she-child-care'
+import { Route as TermsRouteImport } from './routes/terms'
+import { Route as BlogIndexRouteImport } from './routes/blog/index'
+import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
+import { Route as ConditionsIndexRouteImport } from './routes/conditions/index'
+import { Route as ConditionsSlugRouteImport } from './routes/conditions/$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ActivitiesRoute = ActivitiesRouteImport.update({
+  id: '/activities',
+  path: '/activities',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppointmentsRoute = AppointmentsRouteImport.update({
+  id: '/appointments',
+  path: '/appointments',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AutismBookRoute = AutismBookRouteImport.update({
+  id: '/autism-book',
+  path: '/autism-book',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HomeopathyRoute = HomeopathyRouteImport.update({
+  id: '/homeopathy',
+  path: '/homeopathy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RefundRoute = RefundRouteImport.update({
+  id: '/refund',
+  path: '/refund',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResultsRoute = ResultsRouteImport.update({
+  id: '/results',
+  path: '/results',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SheChildCareRoute = SheChildCareRouteImport.update({
+  id: '/she-child-care',
+  path: '/she-child-care',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/blog/',
+  path: '/blog/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/blog/$slug',
+  path: '/blog/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConditionsIndexRoute = ConditionsIndexRouteImport.update({
+  id: '/conditions/',
+  path: '/conditions/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConditionsSlugRoute = ConditionsSlugRouteImport.update({
+  id: '/conditions/$slug',
+  path: '/conditions/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/activities': typeof ActivitiesRoute
+  '/appointments': typeof AppointmentsRoute
+  '/autism-book': typeof AutismBookRoute
+  '/contact': typeof ContactRoute
+  '/homeopathy': typeof HomeopathyRoute
+  '/privacy': typeof PrivacyRoute
+  '/refund': typeof RefundRoute
+  '/results': typeof ResultsRoute
+  '/she-child-care': typeof SheChildCareRoute
+  '/terms': typeof TermsRoute
+  '/blog/$slug': typeof BlogSlugRoute
+  '/conditions/$slug': typeof ConditionsSlugRoute
+  '/blog/': typeof BlogIndexRoute
+  '/conditions/': typeof ConditionsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/activities': typeof ActivitiesRoute
+  '/appointments': typeof AppointmentsRoute
+  '/autism-book': typeof AutismBookRoute
+  '/contact': typeof ContactRoute
+  '/homeopathy': typeof HomeopathyRoute
+  '/privacy': typeof PrivacyRoute
+  '/refund': typeof RefundRoute
+  '/results': typeof ResultsRoute
+  '/she-child-care': typeof SheChildCareRoute
+  '/terms': typeof TermsRoute
+  '/blog/$slug': typeof BlogSlugRoute
+  '/conditions/$slug': typeof ConditionsSlugRoute
+  '/blog': typeof BlogIndexRoute
+  '/conditions': typeof ConditionsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/activities': typeof ActivitiesRoute
+  '/appointments': typeof AppointmentsRoute
+  '/autism-book': typeof AutismBookRoute
+  '/contact': typeof ContactRoute
+  '/homeopathy': typeof HomeopathyRoute
+  '/privacy': typeof PrivacyRoute
+  '/refund': typeof RefundRoute
+  '/results': typeof ResultsRoute
+  '/she-child-care': typeof SheChildCareRoute
+  '/terms': typeof TermsRoute
+  '/blog/$slug': typeof BlogSlugRoute
+  '/conditions/$slug': typeof ConditionsSlugRoute
+  '/blog/': typeof BlogIndexRoute
+  '/conditions/': typeof ConditionsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/activities'
+    | '/appointments'
+    | '/autism-book'
+    | '/contact'
+    | '/homeopathy'
+    | '/privacy'
+    | '/refund'
+    | '/results'
+    | '/she-child-care'
+    | '/terms'
+    | '/blog/$slug'
+    | '/conditions/$slug'
+    | '/blog/'
+    | '/conditions/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/activities'
+    | '/appointments'
+    | '/autism-book'
+    | '/contact'
+    | '/homeopathy'
+    | '/privacy'
+    | '/refund'
+    | '/results'
+    | '/she-child-care'
+    | '/terms'
+    | '/blog/$slug'
+    | '/conditions/$slug'
+    | '/blog'
+    | '/conditions'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/activities'
+    | '/appointments'
+    | '/autism-book'
+    | '/contact'
+    | '/homeopathy'
+    | '/privacy'
+    | '/refund'
+    | '/results'
+    | '/she-child-care'
+    | '/terms'
+    | '/blog/$slug'
+    | '/conditions/$slug'
+    | '/blog/'
+    | '/conditions/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  ActivitiesRoute: typeof ActivitiesRoute
+  AppointmentsRoute: typeof AppointmentsRoute
+  AutismBookRoute: typeof AutismBookRoute
+  ContactRoute: typeof ContactRoute
+  HomeopathyRoute: typeof HomeopathyRoute
+  PrivacyRoute: typeof PrivacyRoute
+  RefundRoute: typeof RefundRoute
+  ResultsRoute: typeof ResultsRoute
+  SheChildCareRoute: typeof SheChildCareRoute
+  TermsRoute: typeof TermsRoute
+  BlogSlugRoute: typeof BlogSlugRoute
+  ConditionsSlugRoute: typeof ConditionsSlugRoute
+  BlogIndexRoute: typeof BlogIndexRoute
+  ConditionsIndexRoute: typeof ConditionsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +247,131 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/activities': {
+      id: '/activities'
+      path: '/activities'
+      fullPath: '/activities'
+      preLoaderRoute: typeof ActivitiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/appointments': {
+      id: '/appointments'
+      path: '/appointments'
+      fullPath: '/appointments'
+      preLoaderRoute: typeof AppointmentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/autism-book': {
+      id: '/autism-book'
+      path: '/autism-book'
+      fullPath: '/autism-book'
+      preLoaderRoute: typeof AutismBookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/homeopathy': {
+      id: '/homeopathy'
+      path: '/homeopathy'
+      fullPath: '/homeopathy'
+      preLoaderRoute: typeof HomeopathyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/refund': {
+      id: '/refund'
+      path: '/refund'
+      fullPath: '/refund'
+      preLoaderRoute: typeof RefundRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/results': {
+      id: '/results'
+      path: '/results'
+      fullPath: '/results'
+      preLoaderRoute: typeof ResultsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/she-child-care': {
+      id: '/she-child-care'
+      path: '/she-child-care'
+      fullPath: '/she-child-care'
+      preLoaderRoute: typeof SheChildCareRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/': {
+      id: '/blog/'
+      path: '/blog'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/blog/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/conditions/': {
+      id: '/conditions/'
+      path: '/conditions'
+      fullPath: '/conditions/'
+      preLoaderRoute: typeof ConditionsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/conditions/$slug': {
+      id: '/conditions/$slug'
+      path: '/conditions/$slug'
+      fullPath: '/conditions/$slug'
+      preLoaderRoute: typeof ConditionsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  ActivitiesRoute: ActivitiesRoute,
+  AppointmentsRoute: AppointmentsRoute,
+  AutismBookRoute: AutismBookRoute,
+  ContactRoute: ContactRoute,
+  HomeopathyRoute: HomeopathyRoute,
+  PrivacyRoute: PrivacyRoute,
+  RefundRoute: RefundRoute,
+  ResultsRoute: ResultsRoute,
+  SheChildCareRoute: SheChildCareRoute,
+  TermsRoute: TermsRoute,
+  BlogSlugRoute: BlogSlugRoute,
+  ConditionsSlugRoute: ConditionsSlugRoute,
+  BlogIndexRoute: BlogIndexRoute,
+  ConditionsIndexRoute: ConditionsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

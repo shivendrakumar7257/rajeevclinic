@@ -6,15 +6,15 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       ...pageMeta(
-        "Dr. Rajeev's Homeopathy Clinic | Personalised Care",
-        "Explore clinic and online consultations, care information, and locations in Ranchi, Patna, Kolkata, and Delhi.",
+        "Dr. Rajeev's The Family Clinic | Complete Care for your Family",
+        "Comprehensive family healthcare and homeopathic consultations across Ranchi, Patna, Kolkata, and Delhi. Consult in clinic or online with doorstep medicine delivery.",
         "/",
       ),
       {
         "script:ld+json": {
           "@context": "https://schema.org",
           "@type": "MedicalClinic",
-          name: "Dr. Rajeev's Homeopathy Clinic",
+          name: "Dr. Rajeev's The Family Clinic",
           telephone: "+91 9234400006",
           email: "globalcare@rajeevclinic.com",
           medicalSpecialty: "Homeopathic",

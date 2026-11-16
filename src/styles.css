@@ -12,21 +12,13 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Design system definition.
+ * Design system definition - Dr. Rajeev's Family Clinic & Hospital Theme
  *
- * The design lives in this file: oklch color tokens on the shadcn variables
- * (--background, --foreground, --primary, --secondary, --muted, --accent, ...) plus
- * new tokens as needed, font tokens, and custom styles and animations.
- *
- * The @theme inline block maps CSS custom properties to Tailwind utility
- * classes (e.g. --color-primary -> bg-primary, text-primary).
- *
- * The :root and .dark blocks define the actual color values using oklch.
- * All colors MUST use oklch format.
- *
- * To add a new semantic color:
- * 1. Add the variable to :root (light value) and .dark (dark value)
- * 2. Register it in @theme inline as --color-<name>: var(--<name>)
+ * Direct color harmony extracted from logo.png:
+ * - Medical Cyan / Sky Blue: oklch(0.62 0.18 235) (~#009fe3)
+ * - Medical Crimson / Urgent Red: oklch(0.57 0.23 27) (~#e5242a)
+ * - Deep Clinical Navy: oklch(0.20 0.05 245) (~#0f2238)
+ * - Hospital Crisp Ice Slate: oklch(0.988 0.005 235) (~#f8fafd)
  */
 
 @theme inline {
@@ -70,86 +62,109 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Poppins", "Inter", sans-serif;
+
+  /* Brand semantic extensions aligned with logo */
+  --color-amber: oklch(0.57 0.23 27);
+  --color-amber-foreground: oklch(1 0 0);
+  --color-medical-red: oklch(0.57 0.23 27);
+  --color-medical-red-soft: oklch(0.965 0.025 27);
+  --color-medical-cyan: oklch(0.62 0.18 235);
+  --color-medical-navy: oklch(0.20 0.05 245);
+  --color-primary-soft: oklch(0.97 0.003 245);
+  --color-primary-dark: oklch(0.20 0.05 245);
 }
 
 :root {
-  --radius: 0.5rem;
-  --background: oklch(0.985 0.009 142);
-  --foreground: oklch(0.245 0.035 163);
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.20 0.035 245);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.245 0.035 163);
+  --card-foreground: oklch(0.20 0.035 245);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.245 0.035 163);
-  --primary: oklch(0.49 0.085 166);
-  --primary-foreground: oklch(0.98 0.01 140);
-  --secondary: oklch(0.93 0.035 164);
-  --secondary-foreground: oklch(0.34 0.07 165);
-  --muted: oklch(0.96 0.014 153);
-  --muted-foreground: oklch(0.49 0.03 165);
-  --accent: oklch(0.78 0.13 75);
-  --accent-foreground: oklch(0.26 0.05 70);
-  --destructive: oklch(0.55 0.19 28);
-  --destructive-foreground: oklch(0.98 0.01 140);
-  --border: oklch(0.9 0.018 158);
-  --input: oklch(0.9 0.018 158);
-  --ring: oklch(0.55 0.09 165);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.97 0.018 155);
-  --sidebar-foreground: oklch(0.245 0.035 163);
-  --sidebar-primary: oklch(0.49 0.085 166);
-  --sidebar-primary-foreground: oklch(0.98 0.01 140);
-  --sidebar-accent: oklch(0.93 0.035 164);
-  --sidebar-accent-foreground: oklch(0.34 0.07 165);
-  --sidebar-border: oklch(0.9 0.018 158);
-  --sidebar-ring: oklch(0.55 0.09 165);
+  --popover-foreground: oklch(0.20 0.035 245);
+
+  /* Primary Logo Cyan/Sky Blue (used for brand accents, not backgrounds) */
+  --primary: oklch(0.62 0.18 235);
+  --primary-foreground: oklch(1 0 0);
+
+  /* Secondary Soft Neutral Slate - Zero baby-blue/cyan background tint */
+  --secondary: oklch(0.972 0.003 245);
+  --secondary-foreground: oklch(0.20 0.035 245);
+
+  --muted: oklch(0.965 0.003 245);
+  --muted-foreground: oklch(0.48 0.025 245);
+
+  /* Accent Logo Crimson Red (Emergency / Heart / Booking) */
+  --accent: oklch(0.57 0.23 27);
+  --accent-foreground: oklch(1 0 0);
+
+  --destructive: oklch(0.57 0.23 27);
+  --destructive-foreground: oklch(1 0 0);
+
+  --border: oklch(0.915 0.015 235);
+  --input: oklch(0.915 0.015 235);
+  --ring: oklch(0.62 0.18 235);
+
+  --chart-1: oklch(0.62 0.18 235);
+  --chart-2: oklch(0.57 0.23 27);
+  --chart-3: oklch(0.72 0.14 210);
+  --chart-4: oklch(0.78 0.15 80);
+  --chart-5: oklch(0.20 0.05 245);
+
+  --sidebar: oklch(0.985 0.008 235);
+  --sidebar-foreground: oklch(0.20 0.035 245);
+  --sidebar-primary: oklch(0.62 0.18 235);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.97 0.003 245);
+  --sidebar-accent-foreground: oklch(0.22 0.06 240);
+  --sidebar-border: oklch(0.915 0.015 235);
+  --sidebar-ring: oklch(0.62 0.18 235);
 }
 
 .dark {
-  --background: oklch(0.17 0.025 165);
-  --foreground: oklch(0.96 0.01 150);
-  --card: oklch(0.22 0.03 163);
-  --card-foreground: oklch(0.96 0.01 150);
-  --popover: oklch(0.22 0.03 163);
-  --popover-foreground: oklch(0.96 0.01 150);
-  --primary: oklch(0.67 0.09 164);
-  --primary-foreground: oklch(0.16 0.03 165);
-  --secondary: oklch(0.29 0.04 164);
-  --secondary-foreground: oklch(0.94 0.02 150);
-  --muted: oklch(0.26 0.03 165);
-  --muted-foreground: oklch(0.73 0.025 160);
-  --accent: oklch(0.77 0.13 75);
-  --accent-foreground: oklch(0.2 0.04 70);
-  --destructive: oklch(0.65 0.16 25);
-  --destructive-foreground: oklch(0.98 0.01 140);
-  --border: oklch(0.34 0.03 165);
-  --input: oklch(0.34 0.03 165);
-  --ring: oklch(0.67 0.09 164);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.22 0.03 163);
-  --sidebar-foreground: oklch(0.96 0.01 150);
-  --sidebar-primary: oklch(0.67 0.09 164);
-  --sidebar-primary-foreground: oklch(0.16 0.03 165);
-  --sidebar-accent: oklch(0.29 0.04 164);
-  --sidebar-accent-foreground: oklch(0.94 0.02 150);
-  --sidebar-border: oklch(0.34 0.03 165);
-  --sidebar-ring: oklch(0.67 0.09 164);
-}
+  --background: oklch(0.15 0.03 245);
+  --foreground: oklch(0.97 0.008 235);
+  --card: oklch(0.20 0.035 245);
+  --card-foreground: oklch(0.97 0.008 235);
+  --popover: oklch(0.20 0.035 245);
+  --popover-foreground: oklch(0.97 0.008 235);
 
-@theme inline {
-  --font-sans: "Inter", sans-serif;
-  --font-display: "Poppins", sans-serif;
-  --color-amber: oklch(0.78 0.13 75);
-  --color-amber-foreground: oklch(0.26 0.05 70);
-  --color-primary-soft: oklch(0.93 0.035 164);
-  --color-primary-dark: oklch(0.34 0.07 165);
+  --primary: oklch(0.66 0.16 235);
+  --primary-foreground: oklch(0.14 0.03 245);
+
+  --secondary: oklch(0.25 0.04 245);
+  --secondary-foreground: oklch(0.95 0.01 235);
+
+  --muted: oklch(0.23 0.03 245);
+  --muted-foreground: oklch(0.72 0.02 235);
+
+  --accent: oklch(0.62 0.22 27);
+  --accent-foreground: oklch(1 0 0);
+
+  --destructive: oklch(0.62 0.22 27);
+  --destructive-foreground: oklch(1 0 0);
+
+  --border: oklch(0.28 0.03 245);
+  --input: oklch(0.28 0.03 245);
+  --ring: oklch(0.66 0.16 235);
+
+  --chart-1: oklch(0.66 0.16 235);
+  --chart-2: oklch(0.62 0.22 27);
+  --chart-3: oklch(0.75 0.14 210);
+  --chart-4: oklch(0.78 0.15 80);
+  --chart-5: oklch(0.85 0.05 245);
+
+  --sidebar: oklch(0.18 0.03 245);
+  --sidebar-foreground: oklch(0.97 0.008 235);
+  --sidebar-primary: oklch(0.66 0.16 235);
+  --sidebar-primary-foreground: oklch(0.14 0.03 245);
+  --sidebar-accent: oklch(0.25 0.04 245);
+  --sidebar-accent-foreground: oklch(0.95 0.01 235);
+  --sidebar-border: oklch(0.28 0.03 245);
+  --sidebar-ring: oklch(0.66 0.16 235);
 }
 
 @layer base {
@@ -161,22 +176,128 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
-    font-feature-settings: "ss01" on;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    -webkit-font-smoothing: antialiased;
   }
 
-  h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); }
-  html { scroll-behavior: smooth; }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Crisp text rendering & complete elimination of button hover blur */
+  button,
+  [role="button"],
+  a,
+  .btn {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  button,
+  [role="button"],
+  a.inline-flex,
+  .btn {
+    transition-property: color, background-color, border-color !important;
+  }
+
+  button:hover,
+  [role="button"]:hover,
+  a:hover,
+  .btn:hover {
+    transform: none !important;
+    filter: none !important;
+    box-shadow: none !important;
+  }
+}
+
+/* Modern hospital grade visual accents */
+.hospital-gradient {
+  background: linear-gradient(135deg, rgba(15, 34, 56, 0.03) 0%, rgba(229, 36, 42, 0.02) 50%, rgba(255, 255, 255, 0) 100%);
+}
+
+.hospital-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.pulse-beacon {
+  position: relative;
+  display: inline-flex;
+  height: 0.5rem;
+  width: 0.5rem;
+}
+.pulse-beacon::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 9999px;
+  background-color: currentColor;
+  opacity: 0.75;
+  animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+.pulse-beacon::after {
+  content: "";
+  position: relative;
+  display: inline-flex;
+  border-radius: 9999px;
+  height: 0.5rem;
+  width: 0.5rem;
+  background-color: currentColor;
 }
 
 @utility soft-enter {
-  animation: soft-enter 700ms cubic-bezier(0.2, 0.7, 0.25, 1) both;
+  animation: soft-enter 600ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 @keyframes soft-enter {
-  from { opacity: 0; transform: translateY(16px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes marquee-left {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee-left {
+  display: flex;
+  width: max-content;
+  animation: marquee-left 45s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-left:hover {
+  animation-play-state: paused;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; }
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+  }
+  .animate-marquee-left {
+    animation: none !important;
+  }
 }
