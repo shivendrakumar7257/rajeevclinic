@@ -31,3 +31,4 @@ use the editor.
 
 ## Project architecture
 - Keep public content in `src/data/*.ts`, shared site chrome and reusable UI in `src/components/`, and pages in TanStack Start file-based routes; this keeps clinic facts editable and navigation consistent.
+- Keep route files focused on URL matching and metadata; implement reusable page views in `src/components/site-pages.tsx` to share layouts and interaction patterns.

@@ -6,5 +6,6 @@ export function pageMeta(title: string, description: string, path: string, type 
     { property: "og:description", content: description },
     { property: "og:type", content: type },
     { property: "og:url", content: path },
+    { name: "twitter:card", content: "summary_large_image" },
   ];
 }
