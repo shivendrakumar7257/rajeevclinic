@@ -29,5 +29,5 @@ export const footerLinks = [
   { label: "Latest updates", to: "/blog" }, { label: "Myths & facts", to: "/homeopathy" },
   { label: "FAQs", to: "/#faqs" }, { label: "Patient stories", to: "/results" },
   { label: "Privacy policy", to: "/privacy" }, { label: "Terms", to: "/terms" },
-  { label: "Cancellation & refund", to: "/refund" },
+  { label: "Cancellation & refund", to: "/refund" }, { label: "Autism book", to: "/autism-book" },
 ];

@@ -1,6 +1,6 @@
 import { useState, type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, CalendarDays, ChevronDown, Clock3, Leaf, Menu, MessageCircle, Phone, ShoppingBag, X } from "lucide-react";
+import { ArrowRight, CalendarDays, ChevronDown, Clock3, Leaf, Menu, MessageCircle, Phone, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { clinicContacts, clinicEmail, footerLinks, mainPhone, navLinks, whatsappPhone } from "@/data/clinic";
@@ -15,7 +15,7 @@ export function SiteHeader() {
     <div className="hidden border-b border-border bg-primary-dark text-primary-foreground md:block">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2 text-xs">
         <span className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-amber" /> Clinics in Ranchi · Patna · Kolkata · Delhi</span>
-        <div className="flex items-center gap-5"><a className="inline-flex items-center gap-1.5 hover:text-amber" href={`tel:${mainPhone.replaceAll(" ", "")}`}><Phone size={13} />{mainPhone}</a><a className="hover:text-amber" href="https://shop.rajeevclinic.com">Buy Autism Book</a><Link className="hover:text-amber" to="/she-child-care">She &amp; Child Care</Link></div>
+        <div className="flex items-center gap-5"><a className="inline-flex items-center gap-1.5 hover:text-amber" href={`tel:${mainPhone.replaceAll(" ", "")}`}><Phone size={13} />{mainPhone}</a><Link className="hover:text-amber" to="/autism-book">Buy Autism Book</Link><Link className="hover:text-amber" to="/she-child-care">She &amp; Child Care</Link></div>
       </div>
     </div>
     <header className="sticky top-0 z-40 border-b border-border/70 bg-background/95 backdrop-blur-md">
