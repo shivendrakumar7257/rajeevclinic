@@ -7,7 +7,7 @@ export const Route = createFileRoute("/results")({
     meta: pageMeta(
       "Results & Patient Stories | Dr. Rajeev's The Family Clinic",
       "Read verified patient experiences and recovery journeys across our clinic network.",
-      "/results"
+      "/results",
     ),
   }),
   component: ResultsPage,

@@ -7,7 +7,7 @@ export const Route = createFileRoute("/privacy")({
     meta: pageMeta(
       "Privacy Policy | Dr. Rajeev's The Family Clinic",
       "How Dr. Rajeev's clinic protects your personal information and clinical records.",
-      "/privacy"
+      "/privacy",
     ),
   }),
   component: () => <PolicyPage type="privacy" />,

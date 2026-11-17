@@ -7,7 +7,7 @@ export const Route = createFileRoute("/conditions/")({
     meta: pageMeta(
       "Conditions A–Z | Dr. Rajeev's The Family Clinic",
       "Browse our comprehensive A–Z clinical directory for common health concerns, allergies, skin diseases, and chronic disorders.",
-      "/conditions"
+      "/conditions",
     ),
   }),
   component: ConditionsPage,

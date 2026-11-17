@@ -7,7 +7,7 @@ export const Route = createFileRoute("/refund")({
     meta: pageMeta(
       "Cancellation & Refund Policy | Dr. Rajeev's The Family Clinic",
       "Policy details regarding appointment changes, cancellations, and dispensary orders.",
-      "/refund"
+      "/refund",
     ),
   }),
   component: () => <PolicyPage type="refund" />,

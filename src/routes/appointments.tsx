@@ -7,7 +7,7 @@ export const Route = createFileRoute("/appointments")({
     meta: pageMeta(
       "Book Appointment | Dr. Rajeev's The Family Clinic",
       "Request an in-clinic OPD consultation with Dr. Rajeev in Ranchi, Patna, Kolkata, or Delhi.",
-      "/appointments"
+      "/appointments",
     ),
   }),
   component: AppointmentsPage,

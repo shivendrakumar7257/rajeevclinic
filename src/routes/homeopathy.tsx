@@ -7,7 +7,7 @@ export const Route = createFileRoute("/homeopathy")({
     meta: pageMeta(
       "Understanding Homeopathy | Dr. Rajeev's The Family Clinic",
       "Principles, scientific context, and how individualized homeopathic care works alongside modern medicine.",
-      "/homeopathy"
+      "/homeopathy",
     ),
   }),
   component: HomeopathyPage,

@@ -46,7 +46,7 @@ import {
 } from "@/data/clinic";
 
 export function AppointmentButton({
-  children = "Book appointment",
+  children,
   className = "",
 }: {
   children?: ReactNode;
@@ -58,8 +58,12 @@ export function AppointmentButton({
       className={`bg-accent text-accent-foreground font-bold shadow-none transition-colors hover:bg-accent/90 ${className}`}
     >
       <Link to="/appointments">
-        <CalendarDays className="size-4" />
-        {children}
+        <CalendarDays className="size-4 shrink-0" />
+        {children ?? (
+          <span>
+            Book<span className="hidden sm:inline"> appointment</span>
+          </span>
+        )}
       </Link>
     </Button>
   );
@@ -78,7 +82,7 @@ export function PatientLoginModal({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md rounded-2xl p-6 sm:p-8">
+      <DialogContent className="w-[calc(100vw-2rem)] max-w-md sm:w-full rounded-2xl p-5 sm:p-8">
         <DialogHeader className="text-center">
           <div className="mx-auto mb-3 grid size-14 place-items-center rounded-2xl bg-primary/10 text-primary">
             <User size={28} />
@@ -220,7 +224,7 @@ export function SiteHeader() {
             <img
               src={logoImg}
               alt="Dr. Rajeev's The Family Clinic Logo"
-              className="h-12 sm:h-14 md:h-[56px] w-auto object-contain"
+              className="h-10 xs:h-12 sm:h-14 md:h-[56px] w-auto max-w-[145px] xs:max-w-[175px] sm:max-w-none object-contain"
               width="230"
               height="56"
             />
@@ -269,21 +273,29 @@ export function SiteHeader() {
               variant="outline"
               size="sm"
               onClick={() => setLoginOpen(true)}
-              className="border-slate-200 bg-white text-slate-800 hover:bg-slate-100 font-bold text-xs h-9 px-3 gap-1 transition-colors rounded-lg shadow-none"
+              className="border-slate-200 bg-white text-slate-800 hover:bg-slate-100 font-bold text-xs h-9 px-2 xs:px-3 gap-1 transition-colors rounded-lg shadow-none shrink-0"
             >
               <User size={13} />
-              Login
+              <span>Login</span>
             </Button>
 
-            <AppointmentButton className="inline-flex text-xs h-9 px-3 rounded-lg shadow-none" />
+            <AppointmentButton className="inline-flex text-xs h-9 px-2.5 sm:px-3 rounded-lg shadow-none shrink-0" />
 
             <Sheet>
               <SheetTrigger asChild>
-                <Button variant="outline" size="icon" aria-label="Open navigation" className="h-9 w-9 border-slate-200 rounded-lg hover:bg-slate-100">
+                <Button
+                  variant="outline"
+                  size="icon"
+                  aria-label="Open navigation"
+                  className="h-9 w-9 shrink-0 border-slate-200 rounded-lg hover:bg-slate-100"
+                >
                   <Menu className="size-4 text-foreground" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="flex w-[min(90vw,380px)] flex-col overflow-y-auto">
+              <SheetContent
+                side="right"
+                className="flex w-[min(90vw,380px)] flex-col overflow-y-auto"
+              >
                 <SheetHeader className="border-b border-border pb-4 text-left">
                   <SheetTitle className="flex items-center gap-2">
                     <img
@@ -319,15 +331,17 @@ export function SiteHeader() {
                       </Link>
                     </SheetClose>
                   ))}
-                  <a
-                    href="https://shop.rajeevclinic.com"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="border-b border-slate-100 py-3 text-base font-bold text-slate-800 flex items-center justify-between"
-                  >
-                    <span>Shop medicine</span>
-                    <ShoppingBag size={18} className="text-primary" />
-                  </a>
+                  <SheetClose asChild>
+                    <a
+                      href="https://shop.rajeevclinic.com"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="border-b border-slate-100 py-3 text-base font-bold text-slate-800 flex items-center justify-between"
+                    >
+                      <span>Shop medicine</span>
+                      <ShoppingBag size={18} className="text-primary" />
+                    </a>
+                  </SheetClose>
                   <SheetClose asChild>
                     <Link
                       to="/she-child-care"
@@ -368,7 +382,10 @@ export function SiteHeader() {
         {/* Tier 2: Sub Header (Dedicated Navigation Menu in Solid White) */}
         <div className="hidden lg:block border-t border-slate-100 bg-white">
           <div className="mx-auto flex max-w-7xl items-center justify-center px-4 sm:px-6">
-            <nav className="flex w-full items-center justify-center gap-4 sm:gap-6 lg:gap-8 xl:gap-10 py-2.5" aria-label="Sub header navigation">
+            <nav
+              className="flex w-full items-center justify-center gap-4 sm:gap-6 lg:gap-8 xl:gap-10 py-2.5"
+              aria-label="Sub header navigation"
+            >
               {navLinks.map((item) => (
                 <Link
                   key={item.to}
@@ -391,7 +408,7 @@ export function SiteFooter() {
     <footer className="bg-primary-dark text-primary-foreground border-t border-primary/20">
       {/* Upper Footer Highlights */}
       <div className="border-b border-primary-foreground/10 bg-primary-dark/80 py-8">
-        <div className="mx-auto max-w-7xl px-5 md:px-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center md:text-left">
+        <div className="mx-auto max-w-7xl px-5 md:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 text-left">
           <div className="flex items-center gap-3">
             <span className="grid size-10 shrink-0 place-items-center rounded-lg bg-primary/20 text-primary">
               <ShieldCheck size={20} />
@@ -446,7 +463,8 @@ export function SiteFooter() {
               </div>
             </Link>
             <p className="max-w-sm text-sm leading-6 text-primary-foreground/80">
-              Personalized homeopathic healthcare with modern clinical attention. Providing comprehensive in-clinic OPD consultations across Ranchi, Patna, Kolkata, and Delhi.
+              Personalized homeopathic healthcare with modern clinical attention. Providing
+              comprehensive in-clinic OPD consultations across Ranchi, Patna, Kolkata, and Delhi.
             </p>
             <div className="space-y-1 text-xs text-primary-foreground/70">
               <p className="font-semibold text-primary-foreground">ABHI HOMEO HALL</p>
@@ -486,7 +504,10 @@ export function SiteFooter() {
               Specialties
             </h2>
             <div className="mt-4 flex flex-col space-y-2.5 text-xs text-primary-foreground/75">
-              <Link to="/she-child-care" className="hover:text-primary-foreground transition-colors">
+              <Link
+                to="/she-child-care"
+                className="hover:text-primary-foreground transition-colors"
+              >
                 She &amp; Child Care
               </Link>
               <Link to="/autism-book" className="hover:text-primary-foreground transition-colors">
@@ -531,9 +552,7 @@ export function SiteFooter() {
           <span>
             © {new Date().getFullYear()} Dr. Rajeev's The Family Clinic. All rights reserved.
           </span>
-          <span>
-            Multi-City In-Clinic OPD Care &amp; Dedicated Homeopathy
-          </span>
+          <span>Multi-City In-Clinic OPD Care &amp; Dedicated Homeopathy</span>
         </div>
       </div>
     </footer>
@@ -542,29 +561,32 @@ export function SiteFooter() {
 
 export function MobileActionBar() {
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-3 border-t border-slate-200 bg-white/95 p-2 shadow-lg backdrop-blur-md md:hidden">
+    <div
+      className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-3 border-t border-slate-200 bg-white/95 p-2 shadow-lg backdrop-blur-md md:hidden"
+      style={{ paddingBottom: "max(0.5rem, env(safe-area-inset-bottom, 0px))" }}
+    >
       <a
         href={`tel:${mainPhone.replaceAll(" ", "")}`}
-        className="flex min-h-12 flex-col items-center justify-center gap-1 text-[11px] font-bold text-slate-800 hover:text-primary transition-colors"
+        className="flex min-h-11 flex-col items-center justify-center gap-1 text-[11px] font-bold text-slate-800 hover:text-primary transition-colors"
       >
         <Phone size={17} className="text-primary" />
-        Call OPD
+        <span>Call OPD</span>
       </a>
       <a
         href={`https://wa.me/${whatsappPhone}`}
         target="_blank"
         rel="noreferrer"
-        className="flex min-h-12 flex-col items-center justify-center gap-1 text-[11px] font-bold text-slate-800 hover:text-emerald-600 transition-colors"
+        className="flex min-h-11 flex-col items-center justify-center gap-1 text-[11px] font-bold text-slate-800 hover:text-emerald-600 transition-colors"
       >
         <MessageCircle size={17} className="text-emerald-600" />
-        WhatsApp
+        <span>WhatsApp</span>
       </a>
       <Link
         to="/appointments"
-        className="flex min-h-12 flex-col items-center justify-center gap-1 text-[11px] font-bold text-accent hover:text-accent/80 transition-colors"
+        className="flex min-h-11 flex-col items-center justify-center gap-1 text-[11px] font-bold text-accent hover:text-accent/80 transition-colors"
       >
         <CalendarDays size={17} />
-        Book Visit
+        <span>Book Visit</span>
       </Link>
     </div>
   );
@@ -574,20 +596,24 @@ export function FloatingSocialActions() {
   return (
     <aside
       aria-label="Quick contact & social links"
-      className="fixed bottom-20 right-4 md:bottom-6 md:right-6 z-40 flex flex-col items-end gap-3 pointer-events-auto"
+      className="fixed bottom-20 right-3 md:bottom-6 md:right-6 z-40 flex flex-col items-end gap-2.5 sm:gap-3 pointer-events-auto"
     >
       {/* Instagram Floating Original Brand Button */}
       <a
         href="https://www.instagram.com/drrajeevclinic/"
         target="_blank"
         rel="noreferrer"
-        className="group relative flex size-12 md:size-13 items-center justify-center rounded-full bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white shadow-lg shadow-pink-500/25 transition-all duration-300 hover:scale-110 active:scale-95 ring-2 ring-white/90"
+        className="group relative flex size-11 md:size-13 items-center justify-center rounded-full bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white shadow-lg shadow-pink-500/25 transition-all duration-300 hover:scale-110 active:scale-95 ring-2 ring-white/90"
         aria-label="Follow Dr. Rajeev's Clinic on Instagram"
       >
         <span className="pointer-events-none absolute right-full mr-3 hidden whitespace-nowrap rounded-lg bg-slate-900/90 px-2.5 py-1 text-xs font-semibold text-white shadow-md backdrop-blur-xs group-hover:block animate-in fade-in">
           Follow on Instagram
         </span>
-        <svg viewBox="0 0 24 24" className="size-6 md:size-7 fill-white" xmlns="http://www.w3.org/2000/svg">
+        <svg
+          viewBox="0 0 24 24"
+          className="size-5 md:size-7 fill-white"
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
         </svg>
       </a>
@@ -597,13 +623,17 @@ export function FloatingSocialActions() {
         href={`https://wa.me/${whatsappPhone}?text=${encodeURIComponent("Hello Dr. Rajeev's Clinic, I would like to inquire about consultation and OPD timings.")}`}
         target="_blank"
         rel="noreferrer"
-        className="group relative flex size-12 md:size-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-xl shadow-emerald-500/30 transition-all duration-300 hover:scale-110 active:scale-95 ring-3 ring-white/95"
+        className="group relative flex size-11 sm:size-12 md:size-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-xl shadow-emerald-500/30 transition-all duration-300 hover:scale-110 active:scale-95 ring-3 ring-white/95"
         aria-label="Chat with Dr. Rajeev's Clinic on WhatsApp"
       >
         <span className="pointer-events-none absolute right-full mr-3 hidden whitespace-nowrap rounded-lg bg-slate-900/90 px-2.5 py-1 text-xs font-semibold text-white shadow-md backdrop-blur-xs group-hover:block animate-in fade-in">
           Chat on WhatsApp
         </span>
-        <svg viewBox="0 0 24 24" className="size-6 md:size-7 fill-white" xmlns="http://www.w3.org/2000/svg">
+        <svg
+          viewBox="0 0 24 24"
+          className="size-5 md:size-7 fill-white"
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24zm4.52 11.64c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.25-.75-.67-1.26-1.5-1.4-1.75-.15-.25-.02-.39.11-.51.11-.11.25-.29.38-.44.13-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.78 2.72 4.31 3.81.6.26 1.07.42 1.44.54.61.19 1.17.17 1.61.1.49-.07 1.47-.6 1.68-1.19.21-.58.21-1.08.14-1.19-.06-.1-.22-.17-.47-.3z" />
         </svg>
       </a>
@@ -615,9 +645,9 @@ export const FloatingWhatsApp = FloatingSocialActions;
 
 export function SiteFrame({ children }: { children: ReactNode }) {
   return (
-    <div className="flex min-h-screen flex-col bg-background text-foreground pb-16 md:pb-0">
+    <div className="flex min-h-screen flex-col bg-background text-foreground pb-[calc(4rem+env(safe-area-inset-bottom,0px))] md:pb-0">
       <SiteHeader />
-      <main className="flex-1">{children}</main>
+      <main className="flex-1 w-full max-w-full overflow-x-hidden">{children}</main>
       <SiteFooter />
       <MobileActionBar />
       <FloatingSocialActions />
@@ -637,11 +667,7 @@ export function SectionHeading({
   align?: "center" | "left";
 }) {
   return (
-    <div
-      className={`mb-10 max-w-2xl ${
-        align === "center" ? "mx-auto text-center" : "text-left"
-      }`}
-    >
+    <div className={`mb-10 max-w-2xl ${align === "center" ? "mx-auto text-center" : "text-left"}`}>
       {eyebrow && (
         <div
           className={`mb-3 inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-slate-100 px-3 py-1 text-xs font-bold uppercase tracking-wider text-slate-700 ${

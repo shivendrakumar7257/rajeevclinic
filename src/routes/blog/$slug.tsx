@@ -10,7 +10,7 @@ export const Route = createFileRoute("/blog/$slug")({
       meta: pageMeta(
         post ? `${post.title} | Dr. Rajeev's Clinic` : "Clinic Update",
         post?.summary ?? "Clinical update details.",
-        `/blog/${params.slug}`
+        `/blog/${params.slug}`,
       ),
     };
   },

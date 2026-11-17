@@ -7,7 +7,7 @@ export const Route = createFileRoute("/contact")({
     meta: pageMeta(
       "Contact Us & Locations | Dr. Rajeev's The Family Clinic",
       "Get phone numbers, OPD clinic addresses in Ranchi, Patna, Kolkata, and Delhi, and email support.",
-      "/contact"
+      "/contact",
     ),
   }),
   component: ContactPage,

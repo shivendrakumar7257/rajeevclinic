@@ -7,7 +7,7 @@ export const Route = createFileRoute("/autism-book")({
     meta: pageMeta(
       "Autism Care Guidance Book | Dr. Rajeev's The Family Clinic",
       "Comprehensive educational book on pediatric autism and sensory support by Dr. Rajeev.",
-      "/autism-book"
+      "/autism-book",
     ),
   }),
   component: AutismBookPage,

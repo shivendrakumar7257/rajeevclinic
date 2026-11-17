@@ -7,7 +7,7 @@ export const Route = createFileRoute("/terms")({
     meta: pageMeta(
       "Terms of Use | Dr. Rajeev's The Family Clinic",
       "Terms and conditions for using Dr. Rajeev's clinic website and appointment services.",
-      "/terms"
+      "/terms",
     ),
   }),
   component: () => <PolicyPage type="terms" />,

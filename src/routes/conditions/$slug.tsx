@@ -10,7 +10,7 @@ export const Route = createFileRoute("/conditions/$slug")({
       meta: pageMeta(
         condition ? `${condition.name} Care | Dr. Rajeev's Clinic` : "Condition Care",
         condition?.summary ?? "Clinical condition details.",
-        `/conditions/${params.slug}`
+        `/conditions/${params.slug}`,
       ),
     };
   },

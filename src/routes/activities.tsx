@@ -7,7 +7,7 @@ export const Route = createFileRoute("/activities")({
     meta: pageMeta(
       "Activities, News, Events & Awards | Dr. Rajeev's The Family Clinic",
       "Discover Dr. Rajeev Kumar's community health camps, media press coverage, healthcare awards, gallery images, and philanthropic seva drives.",
-      "/activities"
+      "/activities",
     ),
   }),
   component: ActivitiesPage,

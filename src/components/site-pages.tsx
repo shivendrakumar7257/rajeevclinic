@@ -42,14 +42,37 @@ import {
 } from "lucide-react";
 import doctorPortrait from "@/assets/clinic-doctor-portrait.jpg";
 import logoImg from "@/assets/logo.png";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { AppointmentForm, ClinicCard, ConditionCard, GoogleLogoIcon, ReviewCard } from "@/components/clinic-widgets";
+import {
+  AppointmentForm,
+  ClinicCard,
+  ConditionCard,
+  GoogleLogoIcon,
+  ReviewCard,
+} from "@/components/clinic-widgets";
 import { AvailabilityNote, EyebrowLink, SectionHeading, SiteFrame } from "@/components/site-shell";
-import { clinicContacts, clinicEmail, faqs, mainPhone, urgentPhone, whatsappPhone } from "@/data/clinic";
-import { conditionCategories, conditions, featuredConditions, getCondition } from "@/data/conditions";
+import {
+  clinicContacts,
+  clinicEmail,
+  faqs,
+  mainPhone,
+  urgentPhone,
+  whatsappPhone,
+} from "@/data/clinic";
+import {
+  conditionCategories,
+  conditions,
+  featuredConditions,
+  getCondition,
+} from "@/data/conditions";
 import { posts, reviews, stories } from "@/data/content";
 
 const wrap = "mx-auto w-full max-w-7xl px-4 sm:px-6 md:px-8";
@@ -111,21 +134,21 @@ function ContactStrip() {
   return (
     <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs font-medium text-muted-foreground">
       <span className="inline-flex items-center gap-1.5 text-foreground">
-        <MapPin size={14} className="text-primary" />
-        OPD Centers: Ranchi · Patna · Kolkata · Delhi
+        <MapPin size={14} className="text-primary shrink-0" />
+        <span>OPD Centers: Ranchi · Patna · Kolkata · Delhi</span>
       </span>
-      <span className="text-border">|</span>
+      <span className="hidden sm:inline text-border">|</span>
       <a
         href={`tel:${mainPhone.replaceAll(" ", "")}`}
         className="inline-flex items-center gap-1.5 text-primary hover:text-primary/80"
       >
-        <Phone size={14} />
-        {mainPhone}
+        <Phone size={14} className="shrink-0" />
+        <span>{mainPhone}</span>
       </a>
-      <span className="text-border">|</span>
+      <span className="hidden sm:inline text-border">|</span>
       <span className="inline-flex items-center gap-1 text-accent font-semibold">
-        <HeartPulse size={14} />
-        Urgent: {urgentPhone}
+        <HeartPulse size={14} className="shrink-0" />
+        <span>Urgent: {urgentPhone}</span>
       </span>
     </div>
   );
@@ -170,7 +193,9 @@ function QuickAction({
             </span>
           )}
         </div>
-        <span className="mt-1.5 block text-xs sm:text-sm text-muted-foreground leading-snug">{detail}</span>
+        <span className="mt-1.5 block text-xs sm:text-sm text-muted-foreground leading-snug">
+          {detail}
+        </span>
       </div>
       <span className="grid size-8 shrink-0 place-items-center rounded-full bg-slate-100 text-slate-600 transition-colors group-hover:bg-primary group-hover:text-white">
         <ArrowRight size={15} />
@@ -259,10 +284,10 @@ function StoryCard(story: (typeof stories)[number]) {
         {/* Patient Identifier */}
         <div className="flex items-center justify-between gap-2 border-b border-slate-100 pb-3">
           <div>
-            <h4 className="font-display text-sm font-bold text-foreground">
-              {story.patientName}
-            </h4>
-            <p className="text-[11px] text-muted-foreground">{story.condition} · {story.age}</p>
+            <h4 className="font-display text-sm font-bold text-foreground">{story.patientName}</h4>
+            <p className="text-[11px] text-muted-foreground">
+              {story.condition} · {story.age}
+            </p>
           </div>
           <div className="flex items-center gap-0.5 text-amber-500">
             {Array.from({ length: story.rating || 5 }).map((_, i) => (
@@ -282,9 +307,7 @@ function StoryCard(story: (typeof stories)[number]) {
             <span className="mt-0.5 shrink-0 rounded-full bg-red-100 px-1.5 py-0.5 text-[10px] font-bold text-red-700">
               Before
             </span>
-            <p className="text-slate-600 leading-relaxed text-[11px]">
-              {story.beforeCondition}
-            </p>
+            <p className="text-slate-600 leading-relaxed text-[11px]">{story.beforeCondition}</p>
           </div>
           <div className="border-t border-slate-200/60 pt-2 flex items-start gap-2">
             <span className="mt-0.5 shrink-0 rounded-full bg-emerald-100 px-1.5 py-0.5 text-[10px] font-bold text-emerald-800">
@@ -299,9 +322,7 @@ function StoryCard(story: (typeof stories)[number]) {
         {/* Patient Testimonial Quote */}
         <div className="mt-4 relative rounded-2xl bg-primary/[0.03] border border-primary/10 p-3.5">
           <Quote className="size-4 text-primary/30 mb-1" />
-          <p className="italic text-xs text-slate-700 leading-relaxed">
-            "{story.quote}"
-          </p>
+          <p className="italic text-xs text-slate-700 leading-relaxed">"{story.quote}"</p>
         </div>
 
         {/* Clinical Approach Note */}
@@ -321,7 +342,10 @@ function StoryCard(story: (typeof stories)[number]) {
               className="inline-flex items-center gap-1.5 text-xs font-bold text-primary hover:underline cursor-pointer"
             >
               <span>{showMilestones ? "Hide Recovery Timeline" : "View Recovery Timeline"}</span>
-              <ChevronRight size={13} className={`transition-transform duration-200 ${showMilestones ? "rotate-90" : ""}`} />
+              <ChevronRight
+                size={13}
+                className={`transition-transform duration-200 ${showMilestones ? "rotate-90" : ""}`}
+              />
             </button>
 
             {showMilestones && (
@@ -339,7 +363,10 @@ function StoryCard(story: (typeof stories)[number]) {
 
         {/* Card Footer Button */}
         <div className="mt-auto pt-5">
-          <Button asChild className="h-10 w-full rounded-xl bg-accent text-xs font-bold text-white shadow-none hover:bg-accent/90">
+          <Button
+            asChild
+            className="h-10 w-full rounded-xl bg-accent text-xs font-bold text-white shadow-none hover:bg-accent/90"
+          >
             <Link to="/appointments">
               Book Consultation <ArrowRight size={14} className="ml-1.5" />
             </Link>
@@ -394,7 +421,8 @@ function PostCard({ post }: { post: (typeof posts)[number] }) {
           params={{ slug: post.slug }}
           className="mt-6 inline-flex items-center gap-1.5 text-xs font-bold text-primary hover:underline"
         >
-          Read article <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+          Read article{" "}
+          <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
         </Link>
       </div>
     </article>
@@ -421,7 +449,9 @@ function FaqList() {
 export function HomePage() {
   const featured = useMemo(() => {
     const list = featuredConditions
-      .map((name) => conditions.find((condition) => condition.name === name || condition.slug === name))
+      .map((name) =>
+        conditions.find((condition) => condition.name === name || condition.slug === name),
+      )
       .filter((condition): condition is (typeof conditions)[number] => condition !== undefined);
     if (list.length < 8) {
       const remaining = conditions.filter((c) => !list.some((item) => item.slug === c.slug));
@@ -435,23 +465,29 @@ export function HomePage() {
       {/* Modern Hospital Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-b from-slate-50 via-white to-white">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent" />
-        <div className={`${wrap} grid min-h-[580px] items-center gap-12 py-14 lg:grid-cols-[1.1fr_.9fr] lg:py-20`}>
+        <div
+          className={`${wrap} grid min-h-[580px] items-center gap-12 py-14 lg:grid-cols-[1.1fr_.9fr] lg:py-20`}
+        >
           {/* Hero Left Content */}
           <div className="relative z-10 max-w-2xl soft-enter">
             {/* Logo Brand Tag */}
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-800 shadow-xs">
-              <span className="flex h-2.5 w-2.5 rounded-full bg-accent animate-pulse" />
+            <div className="mb-6 inline-flex max-w-full flex-wrap items-center gap-1.5 sm:gap-2 rounded-2xl sm:rounded-full border border-slate-200 bg-white px-3 sm:px-4 py-1.5 sm:py-2 text-xs font-semibold text-slate-800 shadow-xs">
+              <span className="flex h-2.5 w-2.5 shrink-0 rounded-full bg-accent animate-pulse" />
               <span>Dr. Rajeev's · The Family Clinic</span>
-              <span className="text-muted-foreground">·</span>
-              <span className="text-accent font-bold">Complete Care for your Family</span>
+              <span className="hidden sm:inline text-muted-foreground">·</span>
+              <span className="hidden sm:inline text-accent font-bold">
+                Complete Care for your Family
+              </span>
             </div>
 
-            <h1 className="font-display text-4xl font-extrabold leading-[1.12] text-foreground sm:text-5xl lg:text-6xl">
+            <h1 className="font-display text-3xl font-extrabold leading-[1.15] text-foreground sm:text-5xl lg:text-6xl">
               Advanced Clinical Care For Your Entire Family
             </h1>
 
             <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-              Individualized homeopathic care for chronic and acute conditions, led by senior practitioners with 15+ years of trust. Consult at our OPD centers across Ranchi, Patna, Kolkata, and Delhi.
+              Individualized homeopathic care for chronic and acute conditions, led by senior
+              practitioners with 15+ years of trust. Consult at our OPD centers across Ranchi,
+              Patna, Kolkata, and Delhi.
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-3">
@@ -460,7 +496,11 @@ export function HomePage() {
                 Book OPD Appointment
               </PrimaryLink>
 
-              <Button asChild variant="outline" className="border-slate-300 bg-white hover:bg-slate-100 text-slate-800 font-semibold transition-colors">
+              <Button
+                asChild
+                variant="outline"
+                className="border-slate-300 bg-white hover:bg-slate-100 text-slate-800 font-semibold transition-colors"
+              >
                 <Link to="/about">
                   <Stethoscope className="size-4 text-primary" />
                   Clinical Methodology
@@ -480,29 +520,29 @@ export function HomePage() {
             </div>
 
             {/* Quick Metrics Bar */}
-            <div className="mt-8 grid grid-cols-3 gap-4 border-t border-border/80 pt-6">
+            <div className="mt-8 grid grid-cols-3 gap-2 sm:gap-4 border-t border-border/80 pt-6">
               <div>
-                <span className="font-display text-2xl font-black text-foreground sm:text-3xl">
+                <span className="font-display text-xl sm:text-2xl lg:text-3xl font-black text-foreground">
                   4.9★
                 </span>
-                <span className="mt-1 block text-xs font-medium text-muted-foreground">
-                  3,500+ Google Reviews
+                <span className="mt-1 block text-[11px] sm:text-xs font-medium text-muted-foreground">
+                  3,500+ Reviews
                 </span>
               </div>
               <div>
-                <span className="font-display text-2xl font-black text-primary sm:text-3xl">
+                <span className="font-display text-xl sm:text-2xl lg:text-3xl font-black text-primary">
                   15+ Yrs
                 </span>
-                <span className="mt-1 block text-xs font-medium text-muted-foreground">
-                  Clinical Experience
+                <span className="mt-1 block text-[11px] sm:text-xs font-medium text-muted-foreground">
+                  Experience
                 </span>
               </div>
               <div>
-                <span className="font-display text-2xl font-black text-accent sm:text-3xl">
+                <span className="font-display text-xl sm:text-2xl lg:text-3xl font-black text-accent">
                   4 OPDs
                 </span>
-                <span className="mt-1 block text-xs font-medium text-muted-foreground">
-                  Ranchi, Patna, Kol, Del
+                <span className="mt-1 block text-[11px] sm:text-xs font-medium text-muted-foreground">
+                  4 Metro Cities
                 </span>
               </div>
             </div>
@@ -523,7 +563,9 @@ export function HomePage() {
                 <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-white">
                   <div>
                     <p className="font-display text-lg font-bold">Dr. Rajeev Kumar</p>
-                    <p className="text-xs text-white/80">B.H.M.S., M.D. (Homeopathy) · Chief Consultant</p>
+                    <p className="text-xs text-white/80">
+                      B.H.M.S., M.D. (Homeopathy) · Chief Consultant
+                    </p>
                   </div>
                   <span className="rounded-full bg-accent px-3 py-1 text-xs font-bold shadow-md">
                     OPD Active
@@ -532,13 +574,11 @@ export function HomePage() {
               </div>
 
               {/* Floating Verified Badge */}
-              <div className="mt-3 flex items-center justify-between px-2 py-1 text-xs">
+              <div className="mt-3 flex flex-wrap items-center justify-between gap-1.5 px-2 py-1 text-xs">
                 <span className="flex items-center gap-1.5 font-bold text-primary">
                   <ShieldCheck size={16} /> Certified Clinical Protocols
                 </span>
-                <span className="text-slate-500 font-medium">
-                  ABHI Homeo Hall Dispensary
-                </span>
+                <span className="text-slate-500 font-medium">ABHI Homeo Hall Dispensary</span>
               </div>
             </div>
           </div>
@@ -567,7 +607,11 @@ export function HomePage() {
             ))}
           </div>
           <div className="mt-10 text-center">
-            <Button asChild variant="outline" className="border-slate-300 bg-white text-slate-800 hover:bg-slate-100 font-bold transition-colors">
+            <Button
+              asChild
+              variant="outline"
+              className="border-slate-300 bg-white text-slate-800 hover:bg-slate-100 font-bold transition-colors"
+            >
               <Link to="/conditions">
                 Explore All 30+ Conditions A–Z <ArrowRight className="size-4 ml-1.5" />
               </Link>
@@ -589,15 +633,24 @@ export function HomePage() {
                 Hospital Care That Starts With Listening
               </h2>
               <p className="text-sm leading-relaxed text-slate-300 sm:text-base lg:text-lg">
-                Every patient's constitution and disease manifestation is unique. We provide comprehensive time to understand your pathology, medical history, and emotional well-being to formulate precise, root-cause homeopathic treatments.
+                Every patient's constitution and disease manifestation is unique. We provide
+                comprehensive time to understand your pathology, medical history, and emotional
+                well-being to formulate precise, root-cause homeopathic treatments.
               </p>
               <div className="flex flex-wrap gap-3 pt-2">
-                <Button asChild className="bg-accent text-white font-bold hover:bg-accent/90 shadow-md">
+                <Button
+                  asChild
+                  className="bg-accent text-white font-bold hover:bg-accent/90 shadow-md"
+                >
                   <Link to="/appointments">
                     Book Consultation <ArrowRight className="size-4 ml-1.5" />
                   </Link>
                 </Button>
-                <Button asChild variant="outline" className="border-white/20 bg-white/5 text-white hover:bg-white/15">
+                <Button
+                  asChild
+                  variant="outline"
+                  className="border-white/20 bg-white/5 text-white hover:bg-white/15"
+                >
                   <Link to="/about">
                     <Stethoscope className="size-4 mr-1.5" />
                     Clinical Methodology
@@ -739,7 +792,8 @@ export function HomePage() {
                 Consulting Doctors Leading Your Care
               </h3>
               <p className="mt-2 text-sm text-slate-600">
-                Experienced clinical homeopaths conducting comprehensive patient intake, constitutional prescription, and ongoing recovery monitoring.
+                Experienced clinical homeopaths conducting comprehensive patient intake,
+                constitutional prescription, and ongoing recovery monitoring.
               </p>
             </div>
 
@@ -760,7 +814,8 @@ export function HomePage() {
                   role: "Senior Consultant – She & Child Care",
                   specialty: "Maternal Health, PCOD/PCOS & Pediatric Wellness",
                   experience: "12+ Years Clinical Practice",
-                  image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=600&h=600&q=80",
+                  image:
+                    "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=600&h=600&q=80",
                   badge: "Senior Consultant",
                 },
                 {
@@ -769,7 +824,8 @@ export function HomePage() {
                   role: "Senior Consultant – Chronic Pathology",
                   specialty: "Respiratory Allergies, Dermatological Care & Dispensary",
                   experience: "14+ Years Clinical Practice",
-                  image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=500&h=600&q=80",
+                  image:
+                    "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=500&h=600&q=80",
                   badge: "Senior Consultant",
                 },
               ].map((dr) => (
@@ -800,17 +856,15 @@ export function HomePage() {
                         {dr.qualifications}
                       </span>
                     </div>
-                    <p className="mt-2.5 text-xs font-semibold text-slate-800">
-                      {dr.role}
-                    </p>
-                    <p className="mt-1 text-xs text-slate-500 leading-relaxed">
-                      {dr.specialty}
-                    </p>
+                    <p className="mt-2.5 text-xs font-semibold text-slate-800">{dr.role}</p>
+                    <p className="mt-1 text-xs text-slate-500 leading-relaxed">{dr.specialty}</p>
                     <div className="mt-auto pt-4 border-t border-slate-200/80 flex items-center justify-between text-xs text-slate-600 font-medium">
                       <span className="flex items-center gap-1 text-accent font-semibold">
                         <Award size={13} /> {dr.experience}
                       </span>
-                      <span className="text-[11px] text-slate-500">Ranchi · Patna · Kolkata · Delhi</span>
+                      <span className="text-[11px] text-slate-500">
+                        Ranchi · Patna · Kolkata · Delhi
+                      </span>
                     </div>
                   </div>
                 </article>
@@ -831,15 +885,24 @@ export function HomePage() {
               Dedicated She &amp; Child Care and Autism Support
             </h2>
             <p className="text-sm leading-relaxed text-primary-foreground/80 sm:text-base">
-              Dr. Rajeev's clinic has pioneered specialized holistic clinical protocols tailored for women's reproductive health, pediatric allergies, and developmental support for children with autism spectrum conditions.
+              Dr. Rajeev's clinic has pioneered specialized holistic clinical protocols tailored for
+              women's reproductive health, pediatric allergies, and developmental support for
+              children with autism spectrum conditions.
             </p>
             <div className="flex flex-wrap gap-3 pt-2">
-              <Button asChild className="bg-accent text-accent-foreground font-bold hover:bg-accent/90 shadow-md">
+              <Button
+                asChild
+                className="bg-accent text-accent-foreground font-bold hover:bg-accent/90 shadow-md"
+              >
                 <Link to="/she-child-care">
                   She &amp; Child Care Details <ArrowRight className="size-4 ml-1" />
                 </Link>
               </Button>
-              <Button asChild variant="outline" className="border-primary-foreground/30 bg-white/10 text-white hover:bg-white/20">
+              <Button
+                asChild
+                variant="outline"
+                className="border-primary-foreground/30 bg-white/10 text-white hover:bg-white/20"
+              >
                 <Link to="/autism-book">
                   <BookOpen className="size-4 mr-1.5" />
                   Autism Care Book
@@ -905,7 +968,8 @@ export function HomePage() {
               Google Reviews From Across India
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-slate-200 sm:text-base">
-              Genuine recovery experiences and 5-star ratings from patients treated across our Ranchi, Patna, Kolkata, and Delhi clinics.
+              Genuine recovery experiences and 5-star ratings from patients treated across our
+              Ranchi, Patna, Kolkata, and Delhi clinics.
             </p>
           </div>
 
@@ -935,13 +999,19 @@ export function HomePage() {
           <div className="animate-marquee-left flex gap-6">
             {/* Set 1 */}
             {reviews.map((review, i) => (
-              <div key={`rev-1-${review.name}-${i}`} className="w-[340px] sm:w-[380px] shrink-0">
+              <div
+                key={`rev-1-${review.name}-${i}`}
+                className="w-[280px] xs:w-[330px] sm:w-[380px] shrink-0"
+              >
                 <ReviewCard review={review} />
               </div>
             ))}
             {/* Set 2 for seamless infinite looping */}
             {reviews.map((review, i) => (
-              <div key={`rev-2-${review.name}-${i}`} className="w-[340px] sm:w-[380px] shrink-0">
+              <div
+                key={`rev-2-${review.name}-${i}`}
+                className="w-[280px] xs:w-[330px] sm:w-[380px] shrink-0"
+              >
                 <ReviewCard review={review} />
               </div>
             ))}
@@ -975,7 +1045,8 @@ export function HomePage() {
               Educational Insights
             </h2>
             <p className="mt-3.5 text-sm leading-relaxed text-slate-600 sm:text-base">
-              Explore evidence-guided articles, homeopathic health perspectives, and practical wellness advice from Dr. Rajeev's clinical desk.
+              Explore evidence-guided articles, homeopathic health perspectives, and practical
+              wellness advice from Dr. Rajeev's clinical desk.
             </p>
           </div>
 
@@ -1022,7 +1093,11 @@ export function HomePage() {
                       params={{ slug: post.slug }}
                       className="inline-flex items-center gap-1.5 text-xs font-bold text-primary group-hover:text-accent transition-colors"
                     >
-                      Read Clinical Article <ArrowRight size={13} className="transition-transform group-hover:translate-x-1" />
+                      Read Clinical Article{" "}
+                      <ArrowRight
+                        size={13}
+                        className="transition-transform group-hover:translate-x-1"
+                      />
                     </Link>
                   </div>
                 </div>
@@ -1037,7 +1112,8 @@ export function HomePage() {
               className="h-11 px-7 bg-primary text-white font-bold hover:bg-primary/90 rounded-xl transition-colors shadow-none text-xs sm:text-sm"
             >
               <Link to="/blog">
-                Explore All Clinical Insights &amp; Articles <ArrowRight className="size-4 ml-1.5" />
+                Explore All Clinical Insights &amp; Articles{" "}
+                <ArrowRight className="size-4 ml-1.5" />
               </Link>
             </Button>
           </div>
@@ -1068,7 +1144,9 @@ export function HomePage() {
                   Dedicated Case Coordinator
                 </h2>
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  Unsure which consultation mode or clinic is right for your case? Our patient desk is here to guide you through preparation, case records, and timely appointment booking.
+                  Unsure which consultation mode or clinic is right for your case? Our patient desk
+                  is here to guide you through preparation, case records, and timely appointment
+                  booking.
                 </p>
               </div>
 
@@ -1095,7 +1173,9 @@ export function HomePage() {
               </div>
 
               <div className="rounded-xl border border-border bg-white p-4 shadow-xs">
-                <p className="text-xs font-semibold uppercase text-muted-foreground">Urgent OPD Helpline</p>
+                <p className="text-xs font-semibold uppercase text-muted-foreground">
+                  Urgent OPD Helpline
+                </p>
                 <div className="mt-2 flex flex-wrap items-center gap-3">
                   <a
                     href={`tel:${urgentPhone.replaceAll(" ", "")}`}
@@ -1119,7 +1199,9 @@ export function HomePage() {
               </div>
 
               <div className="rounded-xl border border-border bg-white p-4 shadow-xs">
-                <p className="text-xs font-semibold uppercase text-muted-foreground">Operating Timings</p>
+                <p className="text-xs font-semibold uppercase text-muted-foreground">
+                  Operating Timings
+                </p>
                 <p className="mt-1 flex items-center gap-1.5 text-sm font-bold text-foreground">
                   <Clock3 size={15} className="text-primary" />
                   Mon–Sun · 10:00 AM – 8:00 PM
@@ -1149,26 +1231,30 @@ export function AboutPage() {
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent" />
         <div className="pointer-events-none absolute right-0 top-0 h-96 w-96 rounded-full bg-accent/5 blur-3xl" />
 
-        <div className={`${wrap} relative z-10 grid gap-12 lg:grid-cols-[1.15fr_.85fr] items-center`}>
+        <div
+          className={`${wrap} relative z-10 grid gap-12 lg:grid-cols-[1.15fr_.85fr] items-center`}
+        >
           {/* Left Content Column */}
           <div className="max-w-2xl">
             {/* Animated Brand Pill */}
-            <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-xs font-bold text-primary shadow-2xs">
-              <span className="flex size-2 rounded-full bg-accent animate-pulse" />
+            <div className="inline-flex max-w-full flex-wrap items-center gap-1.5 sm:gap-2 rounded-2xl sm:rounded-full border border-primary/20 bg-primary/5 px-3 sm:px-4 py-1.5 text-xs font-bold text-primary shadow-2xs">
+              <span className="flex size-2 shrink-0 rounded-full bg-accent animate-pulse" />
               <span>ESTD. 2003</span>
-              <span className="text-muted-foreground/60">·</span>
-              <span>RANCHI &amp; DELHI</span>
+              <span className="hidden xs:inline text-muted-foreground/60">·</span>
+              <span className="hidden xs:inline">RANCHI &amp; DELHI</span>
               <span className="text-muted-foreground/60">·</span>
               <span className="text-accent font-extrabold">15+ YEARS HEALING</span>
             </div>
 
             <h1 className="mt-5 font-display text-3xl font-extrabold tracking-tight text-foreground sm:text-5xl lg:text-6xl leading-[1.12]">
-              About <span className="text-primary">ABHI HOMEO HALL</span> <br className="hidden sm:inline" />
+              About <span className="text-primary">ABHI HOMEO HALL</span>{" "}
+              <br className="hidden sm:inline" />
               &amp; <span className="text-accent">Dr. Rajeev Kumar</span>
             </h1>
 
             <p className="mt-6 text-base sm:text-lg leading-relaxed text-muted-foreground">
-              A one and a half decade legacy of non-toxic classical homeopathic healing, rooted in compassion, modern diagnostics, and deep-seated family values.
+              A one and a half decade legacy of non-toxic classical homeopathic healing, rooted in
+              compassion, modern diagnostics, and deep-seated family values.
             </p>
 
             {/* Core Feature Badges */}
@@ -1190,7 +1276,11 @@ export function AboutPage() {
                 <CalendarDays className="size-4" />
                 Book In-Clinic OPD (₹100)
               </PrimaryLink>
-              <Button asChild variant="outline" className="border-slate-300 bg-white text-slate-800 hover:bg-slate-100 font-bold transition-colors">
+              <Button
+                asChild
+                variant="outline"
+                className="border-slate-300 bg-white text-slate-800 hover:bg-slate-100 font-bold transition-colors"
+              >
                 <a href={`tel:${urgentPhone.replaceAll(" ", "")}`}>
                   <Phone className="size-4 text-accent mr-1.5" />
                   Urgent Helpline
@@ -1236,14 +1326,18 @@ export function AboutPage() {
             </div>
 
             {/* Floating Top Rating Card */}
-            <div className="absolute -top-4 -right-2 sm:-right-4 rounded-2xl border border-slate-200 bg-white/95 p-3.5 shadow-lg backdrop-blur-md">
+            <div className="absolute top-2 right-2 sm:-top-4 sm:-right-4 rounded-2xl border border-slate-200 bg-white/95 p-3 sm:p-3.5 shadow-lg backdrop-blur-md">
               <div className="flex items-center gap-2">
                 <span className="flex text-amber-500">
                   <Star size={16} fill="currentColor" />
                 </span>
-                <span className="font-display text-sm font-bold text-foreground">10,000+ Families</span>
+                <span className="font-display text-sm font-bold text-foreground">
+                  10,000+ Families
+                </span>
               </div>
-              <p className="text-[10px] text-muted-foreground mt-0.5">Restored Across Ranchi &amp; Delhi</p>
+              <p className="text-[10px] text-muted-foreground mt-0.5">
+                Restored Across Ranchi &amp; Delhi
+              </p>
             </div>
           </div>
         </div>
@@ -1252,28 +1346,36 @@ export function AboutPage() {
       {/* 4 Key Pillars Metric Strip */}
       <section className="border-b border-slate-200 bg-white py-10 shadow-2xs">
         <div className={wrap}>
-          <div className="grid grid-cols-2 gap-4 lg:grid-cols-4 sm:gap-6">
-            <div className="rounded-2xl border border-slate-200 bg-slate-50/80 p-6 text-center transition-all hover:bg-white hover:shadow-md">
-              <p className="font-display text-3xl sm:text-4xl font-extrabold text-primary">15+ Years</p>
-              <p className="mt-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">
+          <div className="grid grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-4">
+            <div className="rounded-2xl border border-slate-200 bg-slate-50/80 p-4 sm:p-6 text-center transition-all hover:bg-white hover:shadow-md">
+              <p className="font-display text-2xl sm:text-4xl font-extrabold text-primary">
+                15+ Years
+              </p>
+              <p className="mt-2 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-muted-foreground">
                 Trusted Practice in Ranchi &amp; Delhi
               </p>
             </div>
-            <div className="rounded-2xl border border-slate-200 bg-slate-50/80 p-6 text-center transition-all hover:bg-white hover:shadow-md">
-              <p className="font-display text-3xl sm:text-4xl font-extrabold text-accent">₹100 Only</p>
-              <p className="mt-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">
+            <div className="rounded-2xl border border-slate-200 bg-slate-50/80 p-4 sm:p-6 text-center transition-all hover:bg-white hover:shadow-md">
+              <p className="font-display text-2xl sm:text-4xl font-extrabold text-accent">
+                ₹100 Only
+              </p>
+              <p className="mt-2 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-muted-foreground">
                 Affordable Consultation For All
               </p>
             </div>
-            <div className="rounded-2xl border border-slate-200 bg-slate-50/80 p-6 text-center transition-all hover:bg-white hover:shadow-md">
-              <p className="font-display text-3xl sm:text-4xl font-extrabold text-primary">1,200+ Sq Ft</p>
-              <p className="mt-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">
+            <div className="rounded-2xl border border-slate-200 bg-slate-50/80 p-4 sm:p-6 text-center transition-all hover:bg-white hover:shadow-md">
+              <p className="font-display text-2xl sm:text-4xl font-extrabold text-primary">
+                1,200+ Sq Ft
+              </p>
+              <p className="mt-2 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-muted-foreground">
                 Clinic, In-House Pathology &amp; Pharmacy
               </p>
             </div>
-            <div className="rounded-2xl border border-slate-200 bg-slate-50/80 p-6 text-center transition-all hover:bg-white hover:shadow-md">
-              <p className="font-display text-3xl sm:text-4xl font-extrabold text-accent">10,000+</p>
-              <p className="mt-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">
+            <div className="rounded-2xl border border-slate-200 bg-slate-50/80 p-4 sm:p-6 text-center transition-all hover:bg-white hover:shadow-md">
+              <p className="font-display text-2xl sm:text-4xl font-extrabold text-accent">
+                10,000+
+              </p>
+              <p className="mt-2 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-muted-foreground">
                 Restored Families &amp; Free Thursday OPD
               </p>
             </div>
@@ -1292,13 +1394,22 @@ export function AboutPage() {
               About ABHI HOMEO HALL
             </h2>
             <p className="text-base leading-relaxed text-muted-foreground">
-              <strong>ABHI HOMEO HALL</strong> is a one and half decade old renowned clinic that offers the best quality, non-toxic and highly effective treatment in Ranchi and Delhi. Our treatment is based on the rich and traditional classical homeopathic knowledge and usage of advanced technology.
+              <strong>ABHI HOMEO HALL</strong> is a one and half decade old renowned clinic that
+              offers the best quality, non-toxic and highly effective treatment in Ranchi and Delhi.
+              Our treatment is based on the rich and traditional classical homeopathic knowledge and
+              usage of advanced technology.
             </p>
             <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
-              We have a team of dedicated homeopaths who work to provide efficient service that brings healing power to the patients. Our aim is to spread the homoeopathic treatment to numerous patients suffering from a broad range of diseases and to achieve success in patient care by using classical homeopathy under the brand <strong>ABHI HOMEO HALL</strong>.
+              We have a team of dedicated homeopaths who work to provide efficient service that
+              brings healing power to the patients. Our aim is to spread the homoeopathic treatment
+              to numerous patients suffering from a broad range of diseases and to achieve success
+              in patient care by using classical homeopathy under the brand{" "}
+              <strong>ABHI HOMEO HALL</strong>.
             </p>
             <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
-              We offer excellent patient care, best service and strive to improve every patient’s health vigorously. We also provide the best medical treatment by our experienced doctors which are based on modern scientific research.
+              We offer excellent patient care, best service and strive to improve every patient’s
+              health vigorously. We also provide the best medical treatment by our experienced
+              doctors which are based on modern scientific research.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
@@ -1334,14 +1445,22 @@ export function AboutPage() {
                   <span className="rounded-full bg-primary px-3 py-1 text-[11px] font-bold">
                     Main Road, Ranchi &amp; Delhi
                   </span>
-                  <h3 className="mt-1 font-display text-lg font-bold">ABHI Homoeo Healthcare &amp; Dispensary</h3>
-                  <p className="text-xs text-white/80">1,200 sq. ft. Standalone Clinical Center with Pathology</p>
+                  <h3 className="mt-1 font-display text-lg font-bold">
+                    ABHI Homoeo Healthcare &amp; Dispensary
+                  </h3>
+                  <p className="text-xs text-white/80">
+                    1,200 sq. ft. Standalone Clinical Center with Pathology
+                  </p>
                 </div>
               </div>
               <div className="p-6 sm:p-8 space-y-4">
-                <h4 className="font-display text-base font-bold text-foreground">Our Patient Care Pledge</h4>
+                <h4 className="font-display text-base font-bold text-foreground">
+                  Our Patient Care Pledge
+                </h4>
                 <p className="text-sm leading-relaxed text-muted-foreground">
-                  "We strive to improve every patient’s vitality vigorously. We provide the best medical treatment by our experienced doctors, combining classical Hahnemannian case review with modern scientific research."
+                  "We strive to improve every patient’s vitality vigorously. We provide the best
+                  medical treatment by our experienced doctors, combining classical Hahnemannian
+                  case review with modern scientific research."
                 </p>
               </div>
             </div>
@@ -1368,7 +1487,9 @@ export function AboutPage() {
                       Chief Medical Director
                     </span>
                     <h3 className="mt-2 font-display text-2xl font-bold">Dr. Rajeev Kumar</h3>
-                    <p className="text-xs text-white/85">B.H.M.S. (KNH Bhagalpur, 2004) · M.D. (Hom.)</p>
+                    <p className="text-xs text-white/85">
+                      B.H.M.S. (KNH Bhagalpur, 2004) · M.D. (Hom.)
+                    </p>
                   </div>
                 </div>
 
@@ -1378,7 +1499,9 @@ export function AboutPage() {
                     <span>Academic &amp; Clinical Credentials</span>
                   </div>
                   <p className="mt-1.5 text-xs text-muted-foreground leading-relaxed">
-                    Bachelor of Homoeopathic Medicine and Surgery (B.H.M.S.), KNH Medical College &amp; Hospital, Bhagalpur (2004). Over 15+ years of constitutional clinical mastery.
+                    Bachelor of Homoeopathic Medicine and Surgery (B.H.M.S.), KNH Medical College
+                    &amp; Hospital, Bhagalpur (2004). Over 15+ years of constitutional clinical
+                    mastery.
                   </p>
                 </div>
               </div>
@@ -1387,7 +1510,9 @@ export function AboutPage() {
               <div className="relative rounded-2xl border border-primary/20 bg-primary/5 p-6 shadow-xs">
                 <Quote size={28} className="text-primary/40 mb-2" />
                 <p className="text-sm italic font-medium leading-relaxed text-slate-800">
-                  "My father, Late Kamleshwar Prasad was a social worker and a village mukhiya. Our values were our assets. There was little in the name of savings. I came to Ranchi with just ₹5,000. Rest is history."
+                  "My father, Late Kamleshwar Prasad was a social worker and a village mukhiya. Our
+                  values were our assets. There was little in the name of savings. I came to Ranchi
+                  with just ₹5,000. Rest is history."
                 </p>
                 <p className="mt-3 text-xs font-bold text-primary uppercase tracking-wider">
                   — Dr. Rajeev Kumar
@@ -1411,19 +1536,40 @@ export function AboutPage() {
 
               <div className="space-y-4 text-sm sm:text-base leading-relaxed text-muted-foreground">
                 <p>
-                  He is not the one who believes in building castles in the air. His dreams were restricted, but with his tremendous courage of conviction coupled with an innovative streak, he has translated those restricted dreams into reality. Meet Dr. Rajeev Kumar, the reputed Homeopath of Ranchi, who needs no introduction for the city dwellers.
+                  He is not the one who believes in building castles in the air. His dreams were
+                  restricted, but with his tremendous courage of conviction coupled with an
+                  innovative streak, he has translated those restricted dreams into reality. Meet
+                  Dr. Rajeev Kumar, the reputed Homeopath of Ranchi, who needs no introduction for
+                  the city dwellers.
                 </p>
                 <p>
-                  Born in a middle-class family in Gopalganj, Bihar, to a social worker father, Dr. Rajeev Kumar is one such persona who has scripted a success story that is worthy of emulating. He stands standalone in the crowd of commercialized healthcare as a doctor created through the sheer dint of arduous labor.
+                  Born in a middle-class family in Gopalganj, Bihar, to a social worker father, Dr.
+                  Rajeev Kumar is one such persona who has scripted a success story that is worthy
+                  of emulating. He stands standalone in the crowd of commercialized healthcare as a
+                  doctor created through the sheer dint of arduous labor.
                 </p>
                 <p>
-                  In pursuit of success, Dr. Kumar started off with Abhi Homoeo Hall in 2003 as a homeopathy medicines distributor in a one-room rented house. However, the yearning to become a doctor and serve patients kept bugging him. Soon he left the medicine business to his uncle, Dr. Amreshwar Prasad (also a homeopath), and traveled to Bhagalpur to study homeopathic medicine at KNH Medical College.
+                  In pursuit of success, Dr. Kumar started off with Abhi Homoeo Hall in 2003 as a
+                  homeopathy medicines distributor in a one-room rented house. However, the yearning
+                  to become a doctor and serve patients kept bugging him. Soon he left the medicine
+                  business to his uncle, Dr. Amreshwar Prasad (also a homeopath), and traveled to
+                  Bhagalpur to study homeopathic medicine at KNH Medical College.
                 </p>
                 <p>
-                  Along with studies, the medico constantly shuttled between Bhagalpur and Ranchi to manage the business. Once it got going in Ranchi, his brothers came forward and helped immensely in managing business affairs. Initially, destiny was unfavorable: banks were apprehensive and loan applications fell upon deaf ears. Yet with steadfast perseverance, in 2012 after his degree he finally settled down to take things into his control, securing bank backing and becoming the largest seller and distributor of authentic German-made medicines in the region.
+                  Along with studies, the medico constantly shuttled between Bhagalpur and Ranchi to
+                  manage the business. Once it got going in Ranchi, his brothers came forward and
+                  helped immensely in managing business affairs. Initially, destiny was unfavorable:
+                  banks were apprehensive and loan applications fell upon deaf ears. Yet with
+                  steadfast perseverance, in 2012 after his degree he finally settled down to take
+                  things into his control, securing bank backing and becoming the largest seller and
+                  distributor of authentic German-made medicines in the region.
                 </p>
                 <p>
-                  Dr. Kumar expanded Abhi Homoeo Hall at the Main Road location to 1,200 square feet to accommodate <strong>Abhi Homoeo Healthcare</strong> — a one-of-its-kind clinic armed with its own pathology center and pharmacy. The swanky interior and exteriors coupled with quality, dependable service has won the trust of patients who throng to the center from far and wide.
+                  Dr. Kumar expanded Abhi Homoeo Hall at the Main Road location to 1,200 square feet
+                  to accommodate <strong>Abhi Homoeo Healthcare</strong> — a one-of-its-kind clinic
+                  armed with its own pathology center and pharmacy. The swanky interior and
+                  exteriors coupled with quality, dependable service has won the trust of patients
+                  who throng to the center from far and wide.
                 </p>
               </div>
 
@@ -1443,10 +1589,16 @@ export function AboutPage() {
                   </span>
                 </div>
                 <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                  So what is the fee one may wonder? "It’s a meager ₹100," he utters gently, contented and happy for keeping his treatment affordable for all sections of society:
+                  So what is the fee one may wonder? "It’s a meager ₹100," he utters gently,
+                  contented and happy for keeping his treatment affordable for all sections of
+                  society:
                 </p>
                 <blockquote className="mt-3 border-l-4 border-primary pl-4 text-sm italic text-foreground">
-                  "I could have gone for an MBBS. But I chose homeopathy. Unlike allopath where a doctor has to specialize in a particular line of medicine, in homeopathy a doctor is the master of all diseases. For me, Homeopathy is synonymous with social work. You provide succor to patients suffering from all kinds of disease and still charge nothing compared to allopathic doctors."
+                  "I could have gone for an MBBS. But I chose homeopathy. Unlike allopath where a
+                  doctor has to specialize in a particular line of medicine, in homeopathy a doctor
+                  is the master of all diseases. For me, Homeopathy is synonymous with social work.
+                  You provide succor to patients suffering from all kinds of disease and still
+                  charge nothing compared to allopathic doctors."
                 </blockquote>
               </div>
             </div>
@@ -1473,7 +1625,9 @@ export function AboutPage() {
                 Sai Baba Seva: Free Thursday OPD
               </h3>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                A devoted follower of Sai Baba, Dr. Rajeev sees patients completely for free every Thursday. He holds weekly free health camps and medicine distribution at temple sites across Ranchi. For the poor, he condones fees and medicine prices entirely.
+                A devoted follower of Sai Baba, Dr. Rajeev sees patients completely for free every
+                Thursday. He holds weekly free health camps and medicine distribution at temple
+                sites across Ranchi. For the poor, he condones fees and medicine prices entirely.
               </p>
             </div>
 
@@ -1485,7 +1639,9 @@ export function AboutPage() {
                 Community Awareness Drives
               </h3>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                Dr. Rajeev and like-minded advocates run awareness drives across Ranchi's rural and urban habitats, explaining how homeopathy eliminates the root of disease safely without surgery or toxic side-effects.
+                Dr. Rajeev and like-minded advocates run awareness drives across Ranchi's rural and
+                urban habitats, explaining how homeopathy eliminates the root of disease safely
+                without surgery or toxic side-effects.
               </p>
             </div>
 
@@ -1497,7 +1653,9 @@ export function AboutPage() {
                 Ancestral Land Gift Heritage
               </h3>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                Philanthropy and service to the nation is in the family genes. In the post-independence era, Dr. Rajeev's grandfather gifted ancestral land to the Bihar Government to establish a homeopathy hospital.
+                Philanthropy and service to the nation is in the family genes. In the
+                post-independence era, Dr. Rajeev's grandfather gifted ancestral land to the Bihar
+                Government to establish a homeopathy hospital.
               </p>
             </div>
           </div>
@@ -1516,16 +1674,23 @@ export function AboutPage() {
                 Strength Built on Family &amp; Conviction
               </h2>
               <p className="text-sm sm:text-base leading-relaxed text-slate-300">
-                Born in a family of three sisters and two brothers, Dr. Rajeev still believes that his joint family and close-knit circle has been his potion of growth:
+                Born in a family of three sisters and two brothers, Dr. Rajeev still believes that
+                his joint family and close-knit circle has been his potion of growth:
               </p>
               <blockquote className="border-l-4 border-accent pl-4 text-base italic text-slate-200">
-                "If you don’t have a strong family, you cannot grow. In my initial days it was my cousins and uncles who helped me. My medicine hall and clinic are named on the initials of my two cousins."
+                "If you don’t have a strong family, you cannot grow. In my initial days it was my
+                cousins and uncles who helped me. My medicine hall and clinic are named on the
+                initials of my two cousins."
               </blockquote>
               <p className="text-sm sm:text-base leading-relaxed text-slate-300">
-                Dr. Rajeev is joined in life and clinical vision by his wife, <strong>Dr. Mridula Kumari (B.H.M.S.)</strong>. Together, they are working towards establishing Eastern Zone’s first private 30-bed homeopathy hospital.
+                Dr. Rajeev is joined in life and clinical vision by his wife,{" "}
+                <strong>Dr. Mridula Kumari (B.H.M.S.)</strong>. Together, they are working towards
+                establishing Eastern Zone’s first private 30-bed homeopathy hospital.
               </p>
               <p className="text-sm text-slate-400">
-                His elder son, <strong>Kushagra Kamlesh</strong>, emulates him with the stethoscope, exploring the wonder of remedies alongside his younger son <strong>Kaustubh</strong>.
+                His elder son, <strong>Kushagra Kamlesh</strong>, emulates him with the stethoscope,
+                exploring the wonder of remedies alongside his younger son <strong>Kaustubh</strong>
+                .
               </p>
             </div>
 
@@ -1542,7 +1707,8 @@ export function AboutPage() {
 
               <div className="rounded-2xl border border-white/15 bg-white/5 p-6">
                 <p className="font-display text-xl sm:text-2xl font-bold leading-snug text-white italic">
-                  "Never falter with challenges. They only make you stronger. Take them head on and success will kiss your feet."
+                  "Never falter with challenges. They only make you stronger. Take them head on and
+                  success will kiss your feet."
                 </p>
               </div>
 
@@ -1557,7 +1723,9 @@ export function AboutPage() {
                 </div>
                 <div className="flex items-center gap-3">
                   <span className="flex size-2 rounded-full bg-accent" />
-                  <span>Regional chain of Abhi Homoeo Family Clinics across Eastern &amp; Northern India</span>
+                  <span>
+                    Regional chain of Abhi Homoeo Family Clinics across Eastern &amp; Northern India
+                  </span>
                 </div>
               </div>
             </div>
@@ -1578,9 +1746,12 @@ export function AboutPage() {
           <div className="mt-12 grid gap-6 md:grid-cols-4">
             <div className="relative rounded-2xl border border-slate-200 bg-white p-6 shadow-xs hover:shadow-md transition-shadow">
               <span className="font-display text-3xl font-black text-primary">2003</span>
-              <h3 className="mt-2 font-display text-base font-bold text-foreground">The ₹5,000 Beginning</h3>
+              <h3 className="mt-2 font-display text-base font-bold text-foreground">
+                The ₹5,000 Beginning
+              </h3>
               <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-                Arrived in Ranchi from Gopalganj. Started Abhi Homoeo Hall as a medicine distributor in a one-room rented space.
+                Arrived in Ranchi from Gopalganj. Started Abhi Homoeo Hall as a medicine distributor
+                in a one-room rented space.
               </p>
             </div>
 
@@ -1588,23 +1759,30 @@ export function AboutPage() {
               <span className="font-display text-3xl font-black text-accent">2004</span>
               <h3 className="mt-2 font-display text-base font-bold text-foreground">BHMS Degree</h3>
               <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-                Graduated from KNH College, Bhagalpur. Overcame financial and bank loan hurdles through sheer grit and family support.
+                Graduated from KNH College, Bhagalpur. Overcame financial and bank loan hurdles
+                through sheer grit and family support.
               </p>
             </div>
 
             <div className="relative rounded-2xl border border-slate-200 bg-white p-6 shadow-xs hover:shadow-md transition-shadow">
               <span className="font-display text-3xl font-black text-primary">2012</span>
-              <h3 className="mt-2 font-display text-base font-bold text-foreground">1,200 Sq. Ft. Facility</h3>
+              <h3 className="mt-2 font-display text-base font-bold text-foreground">
+                1,200 Sq. Ft. Facility
+              </h3>
               <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-                Inaugurated Abhi Homoeo Healthcare with pathology and pharmacy, becoming the region's largest German medicine distributor.
+                Inaugurated Abhi Homoeo Healthcare with pathology and pharmacy, becoming the
+                region's largest German medicine distributor.
               </p>
             </div>
 
             <div className="relative rounded-2xl border border-slate-200 bg-white p-6 shadow-xs hover:shadow-md transition-shadow">
               <span className="font-display text-3xl font-black text-accent">Today</span>
-              <h3 className="mt-2 font-display text-base font-bold text-foreground">4 City OPDs &amp; Hospital</h3>
+              <h3 className="mt-2 font-display text-base font-bold text-foreground">
+                4 City OPDs &amp; Hospital
+              </h3>
               <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-                Serving 10,000+ families across Ranchi, Patna, Kolkata, and Delhi with ₹100 OPD and a 30-bed hospital underway.
+                Serving 10,000+ families across Ranchi, Patna, Kolkata, and Delhi with ₹100 OPD and
+                a 30-bed hospital underway.
               </p>
             </div>
           </div>
@@ -1679,7 +1857,9 @@ export function ConditionsPage() {
       title: "Women's & Hormonal Health",
       desc: "PCOD/PCOS, thyroid metabolism, endometriosis & natural cycles",
       categoryName: "Women's health",
-      count: conditions.filter((c) => c.category === "Women's health" || c.category === "Hormonal health").length,
+      count: conditions.filter(
+        (c) => c.category === "Women's health" || c.category === "Hormonal health",
+      ).length,
       icon: Dna,
       badge: "Hormone Harmony",
     },
@@ -1708,15 +1888,21 @@ export function ConditionsPage() {
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent" />
         <div className={`${wrap} relative`}>
           <div className="mx-auto max-w-3xl text-center">
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-slate-700 shadow-sm">
-              <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>Clinical Directory · 30+ Conditions · Root-Cause Homeopathy</span>
+            <div className="mb-4 inline-flex max-w-full flex-wrap items-center justify-center gap-1.5 sm:gap-2 rounded-2xl sm:rounded-full border border-slate-200 bg-white px-3 sm:px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-slate-700 shadow-sm">
+              <span className="size-2 shrink-0 rounded-full bg-emerald-500 animate-pulse" />
+              <span>Clinical Directory</span>
+              <span className="text-muted-foreground/60">·</span>
+              <span>30+ Conditions</span>
+              <span className="hidden sm:inline text-muted-foreground/60">·</span>
+              <span className="hidden sm:inline">Root-Cause Homeopathy</span>
             </div>
             <h1 className="font-display text-3xl font-bold leading-tight text-foreground sm:text-5xl lg:leading-[1.15]">
               Conditions &amp; Specialized Care Directory A–Z
             </h1>
             <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
-              Explore evidence-informed homeopathic protocols, symptom patterns, and root-cause constitutional care developed over 15+ years across our Ranchi, Patna, Kolkata, and Delhi clinics.
+              Explore evidence-informed homeopathic protocols, symptom patterns, and root-cause
+              constitutional care developed over 15+ years across our Ranchi, Patna, Kolkata, and
+              Delhi clinics.
             </p>
 
             {/* 4 Feature Badges Ribbon */}
@@ -1780,9 +1966,13 @@ export function ConditionsPage() {
                 >
                   <div>
                     <div className="flex items-center justify-between">
-                      <span className={`grid size-10 place-items-center rounded-xl transition-colors ${
-                        isSelected ? "bg-primary text-white" : "bg-slate-100 text-slate-700 group-hover:bg-primary/10 group-hover:text-primary"
-                      }`}>
+                      <span
+                        className={`grid size-10 place-items-center rounded-xl transition-colors ${
+                          isSelected
+                            ? "bg-primary text-white"
+                            : "bg-slate-100 text-slate-700 group-hover:bg-primary/10 group-hover:text-primary"
+                        }`}
+                      >
                         <Icon size={20} />
                       </span>
                       <span className="rounded-full bg-slate-100 px-2.5 py-0.5 text-[10px] font-bold text-slate-600">
@@ -1813,7 +2003,7 @@ export function ConditionsPage() {
       <section className={section}>
         <div className={wrap}>
           {/* Search, Active Stats, and Clear */}
-          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+          <div className="rounded-3xl border border-slate-200 bg-white p-4 sm:p-6 shadow-sm">
             <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
               {/* Search Box */}
               <div className="relative flex-1 max-w-lg">
@@ -1863,7 +2053,10 @@ export function ConditionsPage() {
             <div className="mt-5 flex flex-wrap items-center gap-2 border-t border-slate-100 pt-4">
               <span className="text-xs font-bold text-muted-foreground mr-1">Department:</span>
               {conditionCategories.map((item) => {
-                const count = item === "All" ? conditions.length : conditions.filter((c) => c.category === item).length;
+                const count =
+                  item === "All"
+                    ? conditions.length
+                    : conditions.filter((c) => c.category === item).length;
                 const isSelected = category === item;
                 return (
                   <button
@@ -1877,9 +2070,11 @@ export function ConditionsPage() {
                     }`}
                   >
                     <span>{item}</span>
-                    <span className={`rounded-full px-1.5 py-0.2 text-[10px] ${
-                      isSelected ? "bg-white/20 text-white" : "bg-slate-200/80 text-slate-600"
-                    }`}>
+                    <span
+                      className={`rounded-full px-1.5 py-0.2 text-[10px] ${
+                        isSelected ? "bg-white/20 text-white" : "bg-slate-200/80 text-slate-600"
+                      }`}
+                    >
                       {count}
                     </span>
                   </button>
@@ -1894,9 +2089,7 @@ export function ConditionsPage() {
                 type="button"
                 onClick={() => setLetter("All")}
                 className={`h-8 rounded-lg px-2.5 text-xs font-bold transition-colors cursor-pointer ${
-                  letter === "All"
-                    ? "bg-accent text-white"
-                    : "text-slate-600 hover:bg-slate-100"
+                  letter === "All" ? "bg-accent text-white" : "text-slate-600 hover:bg-slate-100"
                 }`}
               >
                 All
@@ -1914,8 +2107,8 @@ export function ConditionsPage() {
                       isSelected
                         ? "bg-accent text-white shadow-xs"
                         : isAvailable
-                        ? "text-slate-700 hover:bg-slate-100 hover:text-foreground"
-                        : "text-slate-300 opacity-40 cursor-not-allowed"
+                          ? "text-slate-700 hover:bg-slate-100 hover:text-foreground"
+                          : "text-slate-300 opacity-40 cursor-not-allowed"
                     }`}
                   >
                     {l}
@@ -1948,7 +2141,8 @@ export function ConditionsPage() {
                 No matching conditions found
               </h3>
               <p className="mt-1 text-xs text-muted-foreground max-w-md mx-auto">
-                We couldn't find any condition matching "{query}". Dr. Rajeev treats a broader range of complex and unlisted chronic disorders.
+                We couldn't find any condition matching "{query}". Dr. Rajeev treats a broader range
+                of complex and unlisted chronic disorders.
               </p>
               <div className="mt-5 flex flex-wrap justify-center gap-3">
                 <Button
@@ -1961,7 +2155,11 @@ export function ConditionsPage() {
                 >
                   Clear Filters &amp; View All
                 </Button>
-                <Button asChild variant="outline" className="rounded-xl border-slate-200 text-xs font-bold text-slate-700">
+                <Button
+                  asChild
+                  variant="outline"
+                  className="rounded-xl border-slate-200 text-xs font-bold text-slate-700"
+                >
                   <a
                     href={`https://wa.me/${whatsappPhone}?text=${encodeURIComponent(`Hello Dr. Rajeev's Clinic Desk, I could not find my condition (${query}) on your website. Can you advise if your clinic treats this?`)}`}
                     target="_blank"
@@ -1988,7 +2186,8 @@ export function ConditionsPage() {
               How We Treat Chronic Conditions
             </h2>
             <p className="mt-2 text-sm text-muted-foreground">
-              A structured, evidence-informed methodology designed to eradicate disease roots rather than simply suppress surface symptoms.
+              A structured, evidence-informed methodology designed to eradicate disease roots rather
+              than simply suppress surface symptoms.
             </p>
           </div>
 
@@ -2001,7 +2200,8 @@ export function ConditionsPage() {
                 Constitutional Intake
               </h3>
               <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-                30–45 minute consultation exploring physical symptoms, mental triggers, thermal affinities, and chronological disease history.
+                30–45 minute consultation exploring physical symptoms, mental triggers, thermal
+                affinities, and chronological disease history.
               </p>
             </div>
 
@@ -2013,7 +2213,8 @@ export function ConditionsPage() {
                 Individual Similimum
               </h3>
               <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-                Applying the Law of Similars to identify the exact constitutional remedy that stimulates your vital immune healing force.
+                Applying the Law of Similars to identify the exact constitutional remedy that
+                stimulates your vital immune healing force.
               </p>
             </div>
 
@@ -2025,7 +2226,8 @@ export function ConditionsPage() {
                 Pure German Dilutions
               </h3>
               <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-                Medicines prepared under strict pharmacopoeia standards at ABHI Homeo Hall, ensuring zero heavy metals or adulterants.
+                Medicines prepared under strict pharmacopoeia standards at ABHI Homeo Hall, ensuring
+                zero heavy metals or adulterants.
               </p>
             </div>
 
@@ -2037,7 +2239,8 @@ export function ConditionsPage() {
                 Relapse Prevention
               </h3>
               <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-                Periodic follow-ups and dietetic adjustments ensure the biological vitality is sustained, avoiding lifelong medication dependence.
+                Periodic follow-ups and dietetic adjustments ensure the biological vitality is
+                sustained, avoiding lifelong medication dependence.
               </p>
             </div>
           </div>
@@ -2067,7 +2270,11 @@ export function ConditionsPage() {
                   Can homeopathic remedies be taken safely alongside allopathic medications?
                 </AccordionTrigger>
                 <AccordionContent className="text-sm leading-relaxed text-muted-foreground">
-                  Yes, absolutely. Homeopathic remedies act on the vital regulatory force and do not interfere pharmacokinetically with conventional allopathic pharmaceuticals. We advise maintaining a 30-minute interval between medicines. Patients should never abruptly stop life-essential allopathic medications (such as anti-hypertensives or insulin) without direct physician supervision.
+                  Yes, absolutely. Homeopathic remedies act on the vital regulatory force and do not
+                  interfere pharmacokinetically with conventional allopathic pharmaceuticals. We
+                  advise maintaining a 30-minute interval between medicines. Patients should never
+                  abruptly stop life-essential allopathic medications (such as anti-hypertensives or
+                  insulin) without direct physician supervision.
                 </AccordionContent>
               </AccordionItem>
 
@@ -2076,7 +2283,11 @@ export function ConditionsPage() {
                   How quickly do homeopathic treatments produce noticeable improvement?
                 </AccordionTrigger>
                 <AccordionContent className="text-sm leading-relaxed text-muted-foreground">
-                  For acute illnesses (such as sudden colds, diarrhea, or acute fever), homeopathic remedies often act within minutes to hours. For long-standing chronic conditions (such as 5-year eczema, PCOD, or bronchial asthma), substantial clinical relief typically develops within 4 to 8 weeks, with complete disease eradication achieved over a few months of tailored care.
+                  For acute illnesses (such as sudden colds, diarrhea, or acute fever), homeopathic
+                  remedies often act within minutes to hours. For long-standing chronic conditions
+                  (such as 5-year eczema, PCOD, or bronchial asthma), substantial clinical relief
+                  typically develops within 4 to 8 weeks, with complete disease eradication achieved
+                  over a few months of tailored care.
                 </AccordionContent>
               </AccordionItem>
 
@@ -2085,7 +2296,11 @@ export function ConditionsPage() {
                   Are Dr. Rajeev's treatments safe for newborn infants and pregnant women?
                 </AccordionTrigger>
                 <AccordionContent className="text-sm leading-relaxed text-muted-foreground">
-                  Yes, homoeopathy is one of the safest medical systems in the world. Remedies are prepared through serial dilution and potentization, meaning they carry zero chemical toxicity, zero teratogenic hazards, and zero risk of organ toxicity. Our She &amp; Child Care department specializes in gentle protocols for expectant mothers and pediatric patients.
+                  Yes, homoeopathy is one of the safest medical systems in the world. Remedies are
+                  prepared through serial dilution and potentization, meaning they carry zero
+                  chemical toxicity, zero teratogenic hazards, and zero risk of organ toxicity. Our
+                  She &amp; Child Care department specializes in gentle protocols for expectant
+                  mothers and pediatric patients.
                 </AccordionContent>
               </AccordionItem>
 
@@ -2094,7 +2309,11 @@ export function ConditionsPage() {
                   What if my diagnosed medical condition is not listed in this directory?
                 </AccordionTrigger>
                 <AccordionContent className="text-sm leading-relaxed text-muted-foreground">
-                  Homeopathy treats the <em>individual who is diseased</em>, rather than just treating a disease label. Even if your specific diagnosis is not listed in this A–Z directory, our senior doctors evaluate your totality of symptoms and formulate a custom similimum remedy. Contact our care desk via WhatsApp or phone to discuss your case.
+                  Homeopathy treats the <em>individual who is diseased</em>, rather than just
+                  treating a disease label. Even if your specific diagnosis is not listed in this
+                  A–Z directory, our senior doctors evaluate your totality of symptoms and formulate
+                  a custom similimum remedy. Contact our care desk via WhatsApp or phone to discuss
+                  your case.
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
@@ -2114,17 +2333,24 @@ export function ConditionsPage() {
                 Ready to Consult Our Senior Homeopaths?
               </h3>
               <p className="mt-1 text-sm text-slate-400">
-                Book an OPD slot at Ranchi, Patna, Kolkata, or Delhi, or request express medicine courier.
+                Book an OPD slot at Ranchi, Patna, Kolkata, or Delhi, or request express medicine
+                courier.
               </p>
             </div>
 
             <div className="flex flex-wrap gap-3">
-              <Button asChild className="h-11 rounded-xl bg-accent px-5 text-xs font-bold text-white shadow-none hover:bg-accent/90">
+              <Button
+                asChild
+                className="h-11 rounded-xl bg-accent px-5 text-xs font-bold text-white shadow-none hover:bg-accent/90"
+              >
                 <Link to="/appointments">
                   Schedule In-Clinic OPD <ArrowRight size={14} className="ml-1.5" />
                 </Link>
               </Button>
-              <Button asChild className="h-11 rounded-xl bg-emerald-600 px-5 text-xs font-bold text-white shadow-none hover:bg-emerald-700">
+              <Button
+                asChild
+                className="h-11 rounded-xl bg-emerald-600 px-5 text-xs font-bold text-white shadow-none hover:bg-emerald-700"
+              >
                 <a
                   href={`https://wa.me/${whatsappPhone}?text=${encodeURIComponent("Hello Dr. Rajeev's Clinic, I would like to schedule a consultation regarding my health concerns.")}`}
                   target="_blank"
@@ -2133,7 +2359,11 @@ export function ConditionsPage() {
                   <MessageCircle size={15} className="mr-2" /> WhatsApp Care Desk
                 </a>
               </Button>
-              <Button asChild variant="outline" className="h-11 rounded-xl border-slate-700 bg-slate-800 text-xs font-bold text-white shadow-none hover:bg-slate-700">
+              <Button
+                asChild
+                variant="outline"
+                className="h-11 rounded-xl border-slate-700 bg-slate-800 text-xs font-bold text-white shadow-none hover:bg-slate-700"
+              >
                 <a href={`tel:${urgentPhone.replaceAll(" ", "")}`}>
                   <Phone size={14} className="mr-2 text-accent" /> Urgent Triage
                 </a>
@@ -2184,7 +2414,10 @@ export function ConditionDetailPage({ slug }: { slug: string }) {
                 {condition.tags && condition.tags.length > 0 && (
                   <div className="flex flex-wrap gap-1.5">
                     {condition.tags.map((tag) => (
-                      <span key={tag} className="rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-700">
+                      <span
+                        key={tag}
+                        className="rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-700"
+                      >
                         {tag}
                       </span>
                     ))}
@@ -2201,7 +2434,9 @@ export function ConditionDetailPage({ slug }: { slug: string }) {
                 Consultation Preparation
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
-                Please have your previous diagnostic reports, current prescriptions, and an approximate timeline of your symptoms ready. Never discontinue ongoing critical prescription medications without consulting your primary doctor.
+                Please have your previous diagnostic reports, current prescriptions, and an
+                approximate timeline of your symptoms ready. Never discontinue ongoing critical
+                prescription medications without consulting your primary doctor.
               </p>
             </section>
 
@@ -2210,15 +2445,20 @@ export function ConditionDetailPage({ slug }: { slug: string }) {
                 The Homeopathic Advantage
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
-                Our approach emphasizes gentle constitutional remedies prepared under strict pharmacopoeia protocols at ABHI HOMEO HALL. Remedies stimulate natural healing without toxic side effects or habit-forming dependencies.
+                Our approach emphasizes gentle constitutional remedies prepared under strict
+                pharmacopoeia protocols at ABHI HOMEO HALL. Remedies stimulate natural healing
+                without toxic side effects or habit-forming dependencies.
               </p>
             </section>
           </article>
 
           <aside className="h-fit rounded-2xl border border-slate-200 bg-white p-6 shadow-sm space-y-5">
-            <h2 className="font-display text-xl font-bold text-foreground">Schedule Consultation</h2>
+            <h2 className="font-display text-xl font-bold text-foreground">
+              Schedule Consultation
+            </h2>
             <p className="text-sm leading-relaxed text-muted-foreground">
-              Discuss <strong>{condition.name}</strong> directly with Dr. Rajeev or our clinical board.
+              Discuss <strong>{condition.name}</strong> directly with Dr. Rajeev or our clinical
+              board.
             </p>
             <div className="pt-2">
               <PrimaryLink to="/appointments">
@@ -2250,13 +2490,15 @@ export function HomeopathyPage() {
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent" />
         <div className="pointer-events-none absolute right-0 top-0 h-96 w-96 rounded-full bg-accent/5 blur-3xl" />
 
-        <div className={`${wrap} relative z-10 grid gap-12 lg:grid-cols-[1.15fr_.85fr] items-center`}>
+        <div
+          className={`${wrap} relative z-10 grid gap-12 lg:grid-cols-[1.15fr_.85fr] items-center`}
+        >
           <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-xs font-bold text-primary shadow-2xs">
-              <span className="flex size-2 rounded-full bg-accent animate-pulse" />
+            <div className="inline-flex max-w-full flex-wrap items-center gap-1.5 sm:gap-2 rounded-2xl sm:rounded-full border border-primary/20 bg-primary/5 px-3 sm:px-4 py-1.5 text-xs font-bold text-primary shadow-2xs">
+              <span className="flex size-2 shrink-0 rounded-full bg-accent animate-pulse" />
               <span>THE SCIENCE OF HEALING</span>
-              <span className="text-muted-foreground/60">·</span>
-              <span>SIMILIA SIMILIBUS CURENTUR</span>
+              <span className="hidden sm:inline text-muted-foreground/60">·</span>
+              <span className="hidden sm:inline">SIMILIA SIMILIBUS CURENTUR</span>
               <span className="text-muted-foreground/60">·</span>
               <span className="text-accent font-extrabold">2ND MOST USED WORLDWIDE</span>
             </div>
@@ -2267,7 +2509,9 @@ export function HomeopathyPage() {
             </h1>
 
             <p className="mt-6 text-base sm:text-lg leading-relaxed text-muted-foreground">
-              A self-contained system of natural therapy that gently supports the body's natural regenerative endeavors by raising the body's <strong>'Vital Force'</strong> — empowering it to overcome disease without adverse side-effects.
+              A self-contained system of natural therapy that gently supports the body's natural
+              regenerative endeavors by raising the body's <strong>'Vital Force'</strong> —
+              empowering it to overcome disease without adverse side-effects.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-2.5 sm:gap-3 text-xs font-bold text-slate-700">
@@ -2287,7 +2531,11 @@ export function HomeopathyPage() {
                 <CalendarDays className="size-4" />
                 Book Consultation (₹100 OPD)
               </PrimaryLink>
-              <Button asChild variant="outline" className="border-slate-300 bg-white text-slate-800 hover:bg-slate-100 font-bold transition-colors">
+              <Button
+                asChild
+                variant="outline"
+                className="border-slate-300 bg-white text-slate-800 hover:bg-slate-100 font-bold transition-colors"
+              >
                 <a href={`tel:${urgentPhone.replaceAll(" ", "")}`}>
                   <Phone className="size-4 text-accent mr-1.5" />
                   Urgent Helpline
@@ -2312,17 +2560,22 @@ export function HomeopathyPage() {
                     Natural Pharmacology
                   </span>
                   <h3 className="mt-2 font-display text-xl font-bold">Ultra-Diluted Potencies</h3>
-                  <p className="text-xs text-white/80">Zero toxic side-effects · Natural bio-energetic resonance</p>
+                  <p className="text-xs text-white/80">
+                    Zero toxic side-effects · Natural bio-energetic resonance
+                  </p>
                 </div>
               </div>
 
               <div className="mt-3 rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <p className="text-xs font-bold text-primary uppercase tracking-wider">Hahnemannian Law</p>
+                <p className="text-xs font-bold text-primary uppercase tracking-wider">
+                  Hahnemannian Law
+                </p>
                 <p className="mt-1 font-display text-base font-bold text-foreground italic">
                   "Similia Similibus Curentur" — Like Cures Like
                 </p>
                 <p className="mt-1 text-xs text-muted-foreground">
-                  A substance that produces specific symptoms in a healthy person can safely cure similar symptoms in a sick person when potentized.
+                  A substance that produces specific symptoms in a healthy person can safely cure
+                  similar symptoms in a sick person when potentized.
                 </p>
               </div>
             </div>
@@ -2342,10 +2595,17 @@ export function HomeopathyPage() {
                 What is Homoeopathy?
               </h2>
               <p className="text-base leading-relaxed text-muted-foreground">
-                Homoeopathy — this truly tongue-twisting term, stemming from the Greek, stands for a self-contained system of therapy which gently supports the natural, regenerative healing endeavors of the organism by raising the body's <strong>'Vital Force'</strong> to such an extent that the body overcomes the disease process and gets back to its normal, healthy self without causing any adverse side-effects.
+                Homoeopathy — this truly tongue-twisting term, stemming from the Greek, stands for a
+                self-contained system of therapy which gently supports the natural, regenerative
+                healing endeavors of the organism by raising the body's{" "}
+                <strong>'Vital Force'</strong> to such an extent that the body overcomes the disease
+                process and gets back to its normal, healthy self without causing any adverse
+                side-effects.
               </p>
               <p className="text-sm sm:text-base leading-relaxed text-muted-foreground">
-                The name Homoeopathy comes from the Greek word <em>"homios"</em> which means <strong>"like"</strong> and the word <em>"pathos"</em> meaning <strong>"suffering"</strong>. It simply means treating like with like.
+                The name Homoeopathy comes from the Greek word <em>"homios"</em> which means{" "}
+                <strong>"like"</strong> and the word <em>"pathos"</em> meaning{" "}
+                <strong>"suffering"</strong>. It simply means treating like with like.
               </p>
 
               <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5 space-y-3">
@@ -2353,10 +2613,15 @@ export function HomeopathyPage() {
                   <Clock3 size={18} className="text-primary" /> Historical Foundations
                 </h4>
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  In the 4th century B.C., <strong>Hippocrates</strong>, the father of modern medicine, observed that large amounts of certain natural substances can produce symptoms in healthy people resembling those caused by disease, while smaller doses of these same substances relieve those symptoms.
+                  In the 4th century B.C., <strong>Hippocrates</strong>, the father of modern
+                  medicine, observed that large amounts of certain natural substances can produce
+                  symptoms in healthy people resembling those caused by disease, while smaller doses
+                  of these same substances relieve those symptoms.
                 </p>
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  In the 1790s, <strong>Dr. Samuel Hahnemann</strong>, a German physician and father of Homoeopathy, amplified this concept and proposed the universal law of <em>"Similia similibus curentur"</em> ("Like cures like").
+                  In the 1790s, <strong>Dr. Samuel Hahnemann</strong>, a German physician and father
+                  of Homoeopathy, amplified this concept and proposed the universal law of{" "}
+                  <em>"Similia similibus curentur"</em> ("Like cures like").
                 </p>
               </div>
             </div>
@@ -2370,20 +2635,31 @@ export function HomeopathyPage() {
                 The Science of Potentization
               </h3>
               <p className="text-sm leading-relaxed text-muted-foreground">
-                Homoeopathic remedies are diluted to such an extent that there can be no possible side-effects from even the most toxic substances. The dilution process is known as <strong>'Potentization'</strong>.
+                Homoeopathic remedies are diluted to such an extent that there can be no possible
+                side-effects from even the most toxic substances. The dilution process is known as{" "}
+                <strong>'Potentization'</strong>.
               </p>
               <div className="space-y-3 border-t border-slate-100 pt-4 text-xs sm:text-sm">
                 <div className="flex items-start gap-3">
                   <CheckCircle2 size={18} className="text-primary shrink-0 mt-0.5" />
-                  <span><strong>Ultra-Diluted Form:</strong> Serial dilution coupled with rhythmic succussion releases the energetic dynamic power of medicinal substances.</span>
+                  <span>
+                    <strong>Ultra-Diluted Form:</strong> Serial dilution coupled with rhythmic
+                    succussion releases the energetic dynamic power of medicinal substances.
+                  </span>
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle2 size={18} className="text-primary shrink-0 mt-0.5" />
-                  <span><strong>Zero Toxic Residue:</strong> Even substances that are toxic in crude form become completely harmless and curative in potentized form.</span>
+                  <span>
+                    <strong>Zero Toxic Residue:</strong> Even substances that are toxic in crude
+                    form become completely harmless and curative in potentized form.
+                  </span>
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle2 size={18} className="text-primary shrink-0 mt-0.5" />
-                  <span><strong>Non-Addictive &amp; Safe:</strong> Remedies do not create chemical dependencies and do not compromise organ function.</span>
+                  <span>
+                    <strong>Non-Addictive &amp; Safe:</strong> Remedies do not create chemical
+                    dependencies and do not compromise organ function.
+                  </span>
                 </div>
               </div>
 
@@ -2454,7 +2730,9 @@ export function HomeopathyPage() {
                 key={pillar.title}
                 className="group rounded-2xl border border-slate-200 bg-white p-7 shadow-xs transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:-translate-y-1"
               >
-                <span className={`grid size-12 place-items-center rounded-xl ${pillar.bg} ${pillar.accent}`}>
+                <span
+                  className={`grid size-12 place-items-center rounded-xl ${pillar.bg} ${pillar.accent}`}
+                >
                   <pillar.icon size={24} />
                 </span>
                 <h3 className="mt-5 font-display text-lg font-bold text-foreground group-hover:text-primary transition-colors">
@@ -2486,26 +2764,42 @@ export function HomeopathyPage() {
                 <span className="rounded-full bg-rose-100 px-3.5 py-1 text-xs font-bold text-rose-700">
                   Conventional Allopathic Model
                 </span>
-                <span className="text-xs font-bold text-rose-500 uppercase">Symptom Suppression</span>
+                <span className="text-xs font-bold text-rose-500 uppercase">
+                  Symptom Suppression
+                </span>
               </div>
               <h3 className="font-display text-2xl font-bold text-slate-900">
                 The Suppressive Approach
               </h3>
               <p className="text-sm leading-relaxed text-slate-700">
-                The allopathic approach to curing disease is to <strong>"suppress"</strong> outward symptoms with strong chemical drugs, acting against the body's natural healing forces.
+                The allopathic approach to curing disease is to <strong>"suppress"</strong> outward
+                symptoms with strong chemical drugs, acting against the body's natural healing
+                forces.
               </p>
               <div className="space-y-3.5 border-t border-rose-200/60 pt-4 text-xs sm:text-sm text-slate-600">
                 <div className="flex items-start gap-2.5">
                   <span className="text-rose-500 font-bold">✕</span>
-                  <span><strong>Masking, Not Curing:</strong> Strong synthetic drugs temporarily mask symptoms. When drugs are stopped, symptoms return in full glory and often in an aggravated state.</span>
+                  <span>
+                    <strong>Masking, Not Curing:</strong> Strong synthetic drugs temporarily mask
+                    symptoms. When drugs are stopped, symptoms return in full glory and often in an
+                    aggravated state.
+                  </span>
                 </div>
                 <div className="flex items-start gap-2.5">
                   <span className="text-rose-500 font-bold">✕</span>
-                  <span><strong>Eradicating Only Bacteria/Viruses:</strong> Clinical bacterial and viral complaints are the <em>end result</em> of an internal imbalance. Eradicating only the pathogen does not address the underlying susceptibility.</span>
+                  <span>
+                    <strong>Eradicating Only Bacteria/Viruses:</strong> Clinical bacterial and viral
+                    complaints are the <em>end result</em> of an internal imbalance. Eradicating
+                    only the pathogen does not address the underlying susceptibility.
+                  </span>
                 </div>
                 <div className="flex items-start gap-2.5">
                   <span className="text-rose-500 font-bold">✕</span>
-                  <span><strong>Immunity Depletion:</strong> Forcing the body with synthetic chemicals over time weakens the Vital Healing Force, leaving the body more vulnerable to future infections.</span>
+                  <span>
+                    <strong>Immunity Depletion:</strong> Forcing the body with synthetic chemicals
+                    over time weakens the Vital Healing Force, leaving the body more vulnerable to
+                    future infections.
+                  </span>
                 </div>
               </div>
             </div>
@@ -2516,26 +2810,39 @@ export function HomeopathyPage() {
                 <span className="rounded-full bg-primary/15 px-3.5 py-1 text-xs font-bold text-primary">
                   Classical Homeopathic Model
                 </span>
-                <span className="text-xs font-bold text-primary uppercase">Vital Force Healing</span>
+                <span className="text-xs font-bold text-primary uppercase">
+                  Vital Force Healing
+                </span>
               </div>
               <h3 className="font-display text-2xl font-bold text-slate-900">
                 The Restorative Approach
               </h3>
               <p className="text-sm leading-relaxed text-slate-700">
-                In contrast, Homoeopathy is built around the natural healing laws of nature. It recognizes that true disease is an energetic imbalance in the body's <strong>Vital Healing Force</strong>.
+                In contrast, Homoeopathy is built around the natural healing laws of nature. It
+                recognizes that true disease is an energetic imbalance in the body's{" "}
+                <strong>Vital Healing Force</strong>.
               </p>
               <div className="space-y-3.5 border-t border-primary/20 pt-4 text-xs sm:text-sm text-slate-700">
                 <div className="flex items-start gap-2.5">
                   <CheckCircle2 size={17} className="text-primary shrink-0 mt-0.5" />
-                  <span><strong>Strengthening the Whole:</strong> By raising the vital force, the body naturally repels bacteria and viruses so infections cannot take hold.</span>
+                  <span>
+                    <strong>Strengthening the Whole:</strong> By raising the vital force, the body
+                    naturally repels bacteria and viruses so infections cannot take hold.
+                  </span>
                 </div>
                 <div className="flex items-start gap-2.5">
                   <CheckCircle2 size={17} className="text-primary shrink-0 mt-0.5" />
-                  <span><strong>5-Dimensional Care:</strong> Resolves imbalances across Genetic, Psychological, Emotional, Functional (Metabolic), and Clinical spheres.</span>
+                  <span>
+                    <strong>5-Dimensional Care:</strong> Resolves imbalances across Genetic,
+                    Psychological, Emotional, Functional (Metabolic), and Clinical spheres.
+                  </span>
                 </div>
                 <div className="flex items-start gap-2.5">
                   <CheckCircle2 size={17} className="text-primary shrink-0 mt-0.5" />
-                  <span><strong>Zero Adverse Residue:</strong> Preserves digestive, hepatic, and renal vitality without surgical or pharmacological toxicity.</span>
+                  <span>
+                    <strong>Zero Adverse Residue:</strong> Preserves digestive, hepatic, and renal
+                    vitality without surgical or pharmacological toxicity.
+                  </span>
                 </div>
               </div>
             </div>
@@ -2547,7 +2854,11 @@ export function HomeopathyPage() {
               The Worldwide Renaissance of Homoeopathic Medicine
             </h4>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-              "The patient is nowadays more enlightened than ever and has for a long time been no longer prepared to 'swallow', in the truest sense of the word, every side effect. Thus, in recent times there has even been a gratifying change in prescribing habits in favor of natural, homoeopathic treatment — allowing prophylactic and therapeutic intervention without having to worry about adverse reactions."
+              "The patient is nowadays more enlightened than ever and has for a long time been no
+              longer prepared to 'swallow', in the truest sense of the word, every side effect.
+              Thus, in recent times there has even been a gratifying change in prescribing habits in
+              favor of natural, homoeopathic treatment — allowing prophylactic and therapeutic
+              intervention without having to worry about adverse reactions."
             </p>
           </div>
         </div>
@@ -2564,7 +2875,9 @@ export function HomeopathyPage() {
               Why Is Homoeopathy So Effective?
             </h2>
             <p className="mt-4 text-base sm:text-lg text-slate-300 leading-relaxed">
-              According to homoeopathic doctrine, <strong>the more diluted the solution, the more potent it becomes</strong>. How does the information in such minute quantities transfer to the body?
+              According to homoeopathic doctrine,{" "}
+              <strong>the more diluted the solution, the more potent it becomes</strong>. How does
+              the information in such minute quantities transfer to the body?
             </p>
           </div>
 
@@ -2578,10 +2891,13 @@ export function HomeopathyPage() {
                 Liquid Crystallization &amp; Memory
               </h3>
               <p className="text-xs sm:text-sm leading-relaxed text-slate-300">
-                Repeated succussion creates an electrochemical pattern stored in the water carrier that spreads like liquid crystallization through the body's own water, triggering bio-electromagnetic field imprinting.
+                Repeated succussion creates an electrochemical pattern stored in the water carrier
+                that spreads like liquid crystallization through the body's own water, triggering
+                bio-electromagnetic field imprinting.
               </p>
               <p className="text-xs text-slate-400 border-t border-white/10 pt-3">
-                <strong>Ayurvedic Parallel:</strong> Ayurveda similarly uses gold-potentized water, transmitting therapeutic energy without molecular degradation.
+                <strong>Ayurvedic Parallel:</strong> Ayurveda similarly uses gold-potentized water,
+                transmitting therapeutic energy without molecular degradation.
               </p>
             </div>
 
@@ -2594,11 +2910,16 @@ export function HomeopathyPage() {
                 The Phenomenon of Hormesis
               </h3>
               <p className="text-xs sm:text-sm leading-relaxed text-slate-300">
-                Scientists call this phenomenon <strong>Hormesis</strong>: very diluted micro-concentrations produce profound biological responses.
+                Scientists call this phenomenon <strong>Hormesis</strong>: very diluted
+                micro-concentrations produce profound biological responses.
               </p>
               <div className="rounded-xl border border-white/10 bg-white/5 p-3 text-xs text-slate-300 space-y-1">
                 <p className="font-bold text-white">Michigan State University Research:</p>
-                <p>Microdoses equivalent to a 9X dilution stimulated crop yield by <strong>30% (tomatoes)</strong>, <strong>21% (carrots)</strong>, and <strong>25% (corn)</strong>.</p>
+                <p>
+                  Microdoses equivalent to a 9X dilution stimulated crop yield by{" "}
+                  <strong>30% (tomatoes)</strong>, <strong>21% (carrots)</strong>, and{" "}
+                  <strong>25% (corn)</strong>.
+                </p>
               </div>
             </div>
 
@@ -2611,11 +2932,17 @@ export function HomeopathyPage() {
                 Micro-Doses in Nature &amp; Physics
               </h3>
               <p className="text-xs sm:text-sm leading-relaxed text-slate-300">
-                Thyroid hormone in human blood is present at only <strong>1 part per 10 billion</strong> — yet this micro-amount regulates the entire metabolism of the human body.
+                Thyroid hormone in human blood is present at only{" "}
+                <strong>1 part per 10 billion</strong> — yet this micro-amount regulates the entire
+                metabolism of the human body.
               </p>
               <div className="rounded-xl border border-white/10 bg-white/5 p-3 text-xs text-slate-300 space-y-1">
                 <p className="font-bold text-white">Einstein’s Energy Law (E = mc²):</p>
-                <p>Just as splitting the nucleus of an atom releases tremendous dynamic energy, homoeopathic potentization splits medicinal atoms into finer particles, generating dynamic curative energy.</p>
+                <p>
+                  Just as splitting the nucleus of an atom releases tremendous dynamic energy,
+                  homoeopathic potentization splits medicinal atoms into finer particles, generating
+                  dynamic curative energy.
+                </p>
               </div>
             </div>
           </div>
@@ -2632,14 +2959,19 @@ export function HomeopathyPage() {
             Experience the Restorative Power of Classical Homoeopathy
           </h2>
           <p className="text-sm sm:text-base leading-relaxed text-muted-foreground max-w-2xl mx-auto">
-            Consult Dr. Rajeev Kumar and our clinical board across Ranchi, Patna, Kolkata, and Delhi for individualized, root-cause healing.
+            Consult Dr. Rajeev Kumar and our clinical board across Ranchi, Patna, Kolkata, and Delhi
+            for individualized, root-cause healing.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
             <PrimaryLink to="/appointments">
               <CalendarDays className="size-4" />
               Book In-Clinic Consultation (₹100 OPD)
             </PrimaryLink>
-            <Button asChild variant="outline" className="border-slate-300 bg-white text-slate-800 hover:bg-slate-100 font-bold transition-colors">
+            <Button
+              asChild
+              variant="outline"
+              className="border-slate-300 bg-white text-slate-800 hover:bg-slate-100 font-bold transition-colors"
+            >
               <Link to="/about">
                 <Award className="size-4 text-primary mr-1.5" />
                 About Dr. Rajeev &amp; ABHI Homeo Hall
@@ -2673,31 +3005,43 @@ export function ResultsPage() {
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent" />
         <div className={`${wrap} relative`}>
           <div className="mx-auto max-w-3xl text-center">
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-slate-700 shadow-sm">
-              <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>Verified Clinical Outcomes · 15+ Years · 10,000+ Recoveries</span>
+            <div className="mb-4 inline-flex max-w-full flex-wrap items-center justify-center gap-1.5 sm:gap-2 rounded-2xl sm:rounded-full border border-slate-200 bg-white px-3 sm:px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-slate-700 shadow-sm">
+              <span className="size-2 shrink-0 rounded-full bg-emerald-500 animate-pulse" />
+              <span>Verified Outcomes</span>
+              <span className="text-muted-foreground/60">·</span>
+              <span>15+ Years</span>
+              <span className="hidden sm:inline text-muted-foreground/60">·</span>
+              <span className="hidden sm:inline">10,000+ Recoveries</span>
             </div>
             <h1 className="font-display text-3xl font-bold leading-tight text-foreground sm:text-5xl lg:leading-[1.15]">
               Documented Patient Recovery Stories &amp; Clinical Outcomes
             </h1>
             <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
-              Explore real patient journeys treated across our Ranchi, Patna, Kolkata, and Delhi clinics. Classical constitutional prescribing, root-cause diagnostics, and pure ABHI Homeo Hall remedies without toxic side-effects or steroid dependency.
+              Explore real patient journeys treated across our Ranchi, Patna, Kolkata, and Delhi
+              clinics. Classical constitutional prescribing, root-cause diagnostics, and pure ABHI
+              Homeo Hall remedies without toxic side-effects or steroid dependency.
             </p>
 
             {/* 4 Outcome Metrics Ribbon */}
             <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
               <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm text-center">
-                <span className="font-display text-2xl sm:text-3xl font-bold text-primary">92.4%</span>
+                <span className="font-display text-2xl sm:text-3xl font-bold text-primary">
+                  92.4%
+                </span>
                 <p className="mt-1 text-xs font-semibold text-slate-700">Clinical Improvement</p>
                 <p className="text-[10px] text-muted-foreground">Documented outcome rate</p>
               </div>
               <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm text-center">
-                <span className="font-display text-2xl sm:text-3xl font-bold text-emerald-600">0%</span>
+                <span className="font-display text-2xl sm:text-3xl font-bold text-emerald-600">
+                  0%
+                </span>
                 <p className="mt-1 text-xs font-semibold text-slate-700">Steroid Reliance</p>
                 <p className="text-[10px] text-muted-foreground">Zero chemical suppressants</p>
               </div>
               <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm text-center">
-                <span className="font-display text-2xl sm:text-3xl font-bold text-accent">10,000+</span>
+                <span className="font-display text-2xl sm:text-3xl font-bold text-accent">
+                  10,000+
+                </span>
                 <p className="mt-1 text-xs font-semibold text-slate-700">Families Treated</p>
                 <p className="text-[10px] text-muted-foreground">Across 4 metro hubs</p>
               </div>
@@ -2724,7 +3068,8 @@ export function ResultsPage() {
                 <span>Featured Breakthrough Case</span>
               </div>
               <span className="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-muted-foreground">
-                <ShieldCheck size={14} className="text-emerald-600" /> Pre- &amp; Post-Clinical Tracking
+                <ShieldCheck size={14} className="text-emerald-600" /> Pre- &amp; Post-Clinical
+                Tracking
               </span>
             </div>
 
@@ -2773,9 +3118,7 @@ export function ResultsPage() {
                         <span className="shrink-0 rounded-md bg-red-100 px-2 py-0.5 text-[10px] font-bold text-red-700">
                           Initial State
                         </span>
-                        <p className="text-slate-600 leading-relaxed">
-                          {featured.beforeCondition}
-                        </p>
+                        <p className="text-slate-600 leading-relaxed">{featured.beforeCondition}</p>
                       </div>
                       <div className="border-t border-slate-200 pt-2.5 flex items-start gap-2.5">
                         <span className="shrink-0 rounded-md bg-emerald-100 px-2 py-0.5 text-[10px] font-bold text-emerald-800">
@@ -2798,9 +3141,13 @@ export function ResultsPage() {
 
                   <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-t border-slate-100 pt-5">
                     <div className="text-xs text-muted-foreground">
-                      <span className="font-semibold text-foreground">Attending Physician:</span> {featured.doctor}
+                      <span className="font-semibold text-foreground">Attending Physician:</span>{" "}
+                      {featured.doctor}
                     </div>
-                    <Button asChild className="h-11 rounded-xl bg-accent px-6 text-xs font-bold text-white shadow-none hover:bg-accent/90">
+                    <Button
+                      asChild
+                      className="h-11 rounded-xl bg-accent px-6 text-xs font-bold text-white shadow-none hover:bg-accent/90"
+                    >
                       <Link to="/appointments">
                         Consult for Similar Case <ArrowRight size={14} className="ml-1.5" />
                       </Link>
@@ -2833,7 +3180,10 @@ export function ResultsPage() {
             {/* Category Filter Pills */}
             <div className="flex flex-wrap gap-2">
               {categories.map((item) => {
-                const count = item === "All" ? stories.length : stories.filter((s) => s.category === item).length;
+                const count =
+                  item === "All"
+                    ? stories.length
+                    : stories.filter((s) => s.category === item).length;
                 return (
                   <Button
                     key={item}
@@ -2849,9 +3199,7 @@ export function ResultsPage() {
                     <span>{item}</span>
                     <span
                       className={`ml-1.5 rounded-full px-1.5 py-0.2 text-[10px] ${
-                        category === item
-                          ? "bg-white/20 text-white"
-                          : "bg-slate-100 text-slate-600"
+                        category === item ? "bg-white/20 text-white" : "bg-slate-100 text-slate-600"
                       }`}
                     >
                       {count}
@@ -2873,9 +3221,16 @@ export function ResultsPage() {
           {visible.length === 0 && (
             <div className="rounded-3xl border border-dashed border-slate-300 bg-slate-50 p-12 text-center">
               <HeartPulse size={40} className="mx-auto text-slate-400" />
-              <h3 className="mt-4 font-display text-lg font-bold text-foreground">No case studies in this category yet</h3>
-              <p className="mt-1 text-xs text-muted-foreground">Please select another specialty or view all clinical records.</p>
-              <Button onClick={() => setCategory("All")} className="mt-4 rounded-xl bg-primary text-xs font-bold text-white">
+              <h3 className="mt-4 font-display text-lg font-bold text-foreground">
+                No case studies in this category yet
+              </h3>
+              <p className="mt-1 text-xs text-muted-foreground">
+                Please select another specialty or view all clinical records.
+              </p>
+              <Button
+                onClick={() => setCategory("All")}
+                className="mt-4 rounded-xl bg-primary text-xs font-bold text-white"
+              >
                 View All Categories
               </Button>
             </div>
@@ -2895,7 +3250,8 @@ export function ResultsPage() {
               What Families Say About Dr. Rajeev's Clinic
             </h2>
             <p className="mt-2 text-sm text-muted-foreground">
-              Independent reviews submitted by patients visiting our Ranchi, Patna, Kolkata, and Delhi consultation centers.
+              Independent reviews submitted by patients visiting our Ranchi, Patna, Kolkata, and
+              Delhi consultation centers.
             </p>
           </div>
 
@@ -2919,7 +3275,8 @@ export function ResultsPage() {
               How We Verify &amp; Measure Outcomes
             </h2>
             <p className="mt-2 text-sm text-muted-foreground">
-              Our systematic clinical protocol bridges traditional classical homeopathy with modern pathology benchmarks.
+              Our systematic clinical protocol bridges traditional classical homeopathy with modern
+              pathology benchmarks.
             </p>
           </div>
 
@@ -2932,7 +3289,8 @@ export function ResultsPage() {
                 Diagnostic Tracking
               </h3>
               <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-                We track objective biomarkers: pre- and post-treatment ultrasound scans, IgE allergy counts, thyroid profiles, and stool/blood panels.
+                We track objective biomarkers: pre- and post-treatment ultrasound scans, IgE allergy
+                counts, thyroid profiles, and stool/blood panels.
               </p>
             </div>
 
@@ -2944,7 +3302,8 @@ export function ResultsPage() {
                 Constitutional Totality
               </h3>
               <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-                Prescriptions target the whole individual—mental state, thermal affinity, and physiological reactivity—addressing susceptibility rather than isolated symptoms.
+                Prescriptions target the whole individual—mental state, thermal affinity, and
+                physiological reactivity—addressing susceptibility rather than isolated symptoms.
               </p>
             </div>
 
@@ -2956,7 +3315,8 @@ export function ResultsPage() {
                 Certified German Remedies
               </h3>
               <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-                All medicines are sourced from licensed German manufacturers via ABHI Homeo Hall, ensuring ultra-pure potentization free from adulterants or heavy metals.
+                All medicines are sourced from licensed German manufacturers via ABHI Homeo Hall,
+                ensuring ultra-pure potentization free from adulterants or heavy metals.
               </p>
             </div>
 
@@ -2968,14 +3328,19 @@ export function ResultsPage() {
                 Relapse Prevention
               </h3>
               <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-                By strengthening the patient's vital immune force, recovery is permanent. Follow-ups ensure health stability without lifelong dependency on medicines.
+                By strengthening the patient's vital immune force, recovery is permanent. Follow-ups
+                ensure health stability without lifelong dependency on medicines.
               </p>
             </div>
           </div>
 
           {/* Compliance & Consent Note */}
           <div className="mt-12 rounded-2xl border border-slate-200 bg-slate-50 p-5 text-xs leading-relaxed text-slate-600">
-            <strong>Clinical Notice &amp; Patient Privacy:</strong> Individual recovery times vary based on health chronicity, prior pharmacological history, and adherence to dietary posology. Case studies and reviews are documented and published with full informed patient or parental consent. Dr. Rajeev's clinics practice evidence-informed classical homeopathy adhering to recognized AYUSH clinical guidelines.
+            <strong>Clinical Notice &amp; Patient Privacy:</strong> Individual recovery times vary
+            based on health chronicity, prior pharmacological history, and adherence to dietary
+            posology. Case studies and reviews are documented and published with full informed
+            patient or parental consent. Dr. Rajeev's clinics practice evidence-informed classical
+            homeopathy adhering to recognized AYUSH clinical guidelines.
           </div>
         </div>
       </section>
@@ -2992,17 +3357,24 @@ export function ResultsPage() {
                 Ready to Experience Root-Cause Healing?
               </h3>
               <p className="mt-1 text-sm text-slate-400">
-                Book an OPD consultation at Ranchi, Patna, Kolkata, or Delhi, or speak directly with our senior care desk.
+                Book an OPD consultation at Ranchi, Patna, Kolkata, or Delhi, or speak directly with
+                our senior care desk.
               </p>
             </div>
 
             <div className="flex flex-wrap gap-3">
-              <Button asChild className="h-11 rounded-xl bg-accent px-5 text-xs font-bold text-white shadow-none hover:bg-accent/90">
+              <Button
+                asChild
+                className="h-11 rounded-xl bg-accent px-5 text-xs font-bold text-white shadow-none hover:bg-accent/90"
+              >
                 <Link to="/appointments">
                   Schedule In-Clinic OPD <ArrowRight size={14} className="ml-1.5" />
                 </Link>
               </Button>
-              <Button asChild className="h-11 rounded-xl bg-emerald-600 px-5 text-xs font-bold text-white shadow-none hover:bg-emerald-700">
+              <Button
+                asChild
+                className="h-11 rounded-xl bg-emerald-600 px-5 text-xs font-bold text-white shadow-none hover:bg-emerald-700"
+              >
                 <a
                   href={`https://wa.me/${whatsappPhone}?text=${encodeURIComponent("Hello Dr. Rajeev's Clinic, I would like to schedule a consultation regarding my health concerns.")}`}
                   target="_blank"
@@ -3043,7 +3415,8 @@ export function AppointmentsPage() {
                   OPD Centers &amp; Timings
                 </h2>
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  All our centers in Ranchi, Patna, Kolkata, and Delhi are fully equipped with dedicated consultation chambers and ABHI Homeo Hall dispensing counters.
+                  All our centers in Ranchi, Patna, Kolkata, and Delhi are fully equipped with
+                  dedicated consultation chambers and ABHI Homeo Hall dispensing counters.
                 </p>
               </div>
 
@@ -3055,7 +3428,9 @@ export function AppointmentsPage() {
               </div>
 
               <div className="rounded-xl border border-border bg-background p-4 shadow-xs">
-                <p className="text-xs font-semibold uppercase text-muted-foreground">Urgent Assistance</p>
+                <p className="text-xs font-semibold uppercase text-muted-foreground">
+                  Urgent Assistance
+                </p>
                 <a
                   href={`tel:${urgentPhone.replaceAll(" ", "")}`}
                   className="mt-1 flex items-center gap-1.5 text-base font-bold text-accent hover:underline"
@@ -3077,7 +3452,10 @@ export function AppointmentsPage() {
 
 export function BlogPage() {
   const [category, setCategory] = useState("All");
-  const categories = useMemo(() => ["All", ...Array.from(new Set(posts.map((p) => p.category)))], []);
+  const categories = useMemo(
+    () => ["All", ...Array.from(new Set(posts.map((p) => p.category)))],
+    [],
+  );
   const filtered = posts.filter((p) => category === "All" || p.category === category);
 
   return (
@@ -3163,7 +3541,10 @@ export function BlogDetailPage({ slug }: { slug: string }) {
           {post.body}
         </div>
         <div className="mt-10">
-          <Link to="/blog" className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:underline">
+          <Link
+            to="/blog"
+            className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:underline"
+          >
             <ArrowRight className="rotate-180" size={16} /> Back to all articles
           </Link>
         </div>
@@ -3173,7 +3554,9 @@ export function BlogDetailPage({ slug }: { slug: string }) {
 }
 
 export function ActivitiesPage() {
-  const [activeTab, setActiveTab] = useState<"All" | "News" | "Events" | "Awards" | "Gallery" | "Stories">("All");
+  const [activeTab, setActiveTab] = useState<
+    "All" | "News" | "Events" | "Awards" | "Gallery" | "Stories"
+  >("All");
   const [galleryCategory, setGalleryCategory] = useState("All");
 
   const newsArticles = [
@@ -3181,7 +3564,8 @@ export function ActivitiesPage() {
       publication: "The Times Health / Eastern Chronicle",
       date: "October 2026",
       tag: "Featured Press Coverage",
-      title: "How Dr. Rajeev Kumar Built Eastern India's Foremost Classical Homeopathy & German Medicine Hub",
+      title:
+        "How Dr. Rajeev Kumar Built Eastern India's Foremost Classical Homeopathy & German Medicine Hub",
       summary:
         "From humble beginnings in Gopalganj to arriving in Ranchi with just ₹5,000, Dr. Rajeev Kumar has translated restricted dreams into a regional healthcare leader. Today, ABHI Homeo Hall and its modern clinics across Ranchi, Patna, Kolkata, and Delhi set the benchmark for non-toxic classical healing.",
       readMoreText: "Read Coverage Summary",
@@ -3191,7 +3575,8 @@ export function ActivitiesPage() {
       publication: "State Medical Journal / AYUSH Today",
       date: "August 2026",
       tag: "Hospital Initiative",
-      title: "Eastern Zone's First Private 30-Bed Classical Homeopathic Hospital Announced in Ranchi",
+      title:
+        "Eastern Zone's First Private 30-Bed Classical Homeopathic Hospital Announced in Ranchi",
       summary:
         "Envisaged by Dr. Rajeev Kumar, the upcoming 30-bed healthcare facility will feature dedicated chronic care chambers, on-site pathology, physical therapy integration, and an advanced German homeopathic pharmacy dispensing certified dilutions.",
       readMoreText: "View Hospital Project Details",
@@ -3211,7 +3596,8 @@ export function ActivitiesPage() {
       publication: "Ranchi Express Health Desk",
       date: "May 2026",
       tag: "Scientific Outreach",
-      title: "Awareness Drives on Micro-Dosing and the Permanent Eradication of Chronic Disease Root Causes",
+      title:
+        "Awareness Drives on Micro-Dosing and the Permanent Eradication of Chronic Disease Root Causes",
       summary:
         "Dr. Rajeev Kumar led scientific seminars across urban and rural Jharkhand dispelling myths about homeopathy, detailing how ultra-diluted micro-doses stimulate the body's natural Vital Force to clear eczema, asthma, and kidney stones without surgery.",
       readMoreText: "Explore Seminar Highlights",
@@ -3303,54 +3689,67 @@ export function ActivitiesPage() {
       category: "Clinics",
       location: "Main Road Flagship, Ranchi",
       date: "Daily Practice",
-      image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=700&h=480&q=80",
-      caption: "Dr. Rajeev Kumar conducting thorough constitutional case taking and personal pulse evaluation.",
+      image:
+        "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=700&h=480&q=80",
+      caption:
+        "Dr. Rajeev Kumar conducting thorough constitutional case taking and personal pulse evaluation.",
     },
     {
       title: "Weekly Thursday Free Seva Camp",
       category: "Health Camps",
       location: "Temple Site, Ranchi",
       date: "Every Thursday",
-      image: "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=700&h=480&q=80",
-      caption: "Free medicine distribution and health screenings for underprivileged families in honor of Sai Baba.",
+      image:
+        "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=700&h=480&q=80",
+      caption:
+        "Free medicine distribution and health screenings for underprivileged families in honor of Sai Baba.",
     },
     {
       title: "ABHI Homeo Hall German Dispensary",
       category: "Dispensary",
       location: "Central Pharmacy Hub, Ranchi",
       date: "Licensed Unit",
-      image: "https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?auto=format&fit=crop&w=700&h=480&q=80",
-      caption: "State-of-the-art storage and precision dispensing of certified German dilutions and biochemic salts.",
+      image:
+        "https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?auto=format&fit=crop&w=700&h=480&q=80",
+      caption:
+        "State-of-the-art storage and precision dispensing of certified German dilutions and biochemic salts.",
     },
     {
       title: "AYUSH Scientific Keynote Presentation",
       category: "Awards",
       location: "National Convention, New Delhi",
       date: "Annual Summit",
-      image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=700&h=480&q=80",
-      caption: "Dr. Rajeev addressing healthcare delegates on documented non-surgical kidney stone dissolution.",
+      image:
+        "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=700&h=480&q=80",
+      caption:
+        "Dr. Rajeev addressing healthcare delegates on documented non-surgical kidney stone dissolution.",
     },
     {
       title: "Autism Guidance & Parent Workshop",
       category: "Health Camps",
       location: "Community Center, Kolkata",
       date: "Special Session",
-      image: "https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&w=700&h=480&q=80",
-      caption: "Empowering parents and caregivers with actionable daily routines from the Autism Care Guidebook.",
+      image:
+        "https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&w=700&h=480&q=80",
+      caption:
+        "Empowering parents and caregivers with actionable daily routines from the Autism Care Guidebook.",
     },
     {
       title: "Clinical Board Case Conference",
       category: "Clinics",
       location: "OPD Center, Patna",
       date: "Weekly Review",
-      image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=700&h=480&q=80",
-      caption: "Senior homeopathic practitioners and diagnostic consultants analyzing pre- and post-USG reports.",
+      image:
+        "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=700&h=480&q=80",
+      caption:
+        "Senior homeopathic practitioners and diagnostic consultants analyzing pre- and post-USG reports.",
     },
   ];
 
-  const visibleGallery = galleryCategory === "All"
-    ? galleryImages
-    : galleryImages.filter((img) => img.category === galleryCategory);
+  const visibleGallery =
+    galleryCategory === "All"
+      ? galleryImages
+      : galleryImages.filter((img) => img.category === galleryCategory);
 
   return (
     <SiteFrame>
@@ -3359,36 +3758,51 @@ export function ActivitiesPage() {
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent" />
         <div className={`${wrap} relative`}>
           <div className="mx-auto max-w-3xl text-center">
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-slate-700 shadow-sm">
-              <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>Clinical Milestones · Community Impact · AYUSH Excellence</span>
+            <div className="mb-4 inline-flex max-w-full flex-wrap items-center justify-center gap-1.5 sm:gap-2 rounded-2xl sm:rounded-full border border-slate-200 bg-white px-3 sm:px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-slate-700 shadow-sm">
+              <span className="size-2 shrink-0 rounded-full bg-emerald-500 animate-pulse" />
+              <span>Clinical Milestones</span>
+              <span className="text-muted-foreground/60">·</span>
+              <span>Community Impact</span>
+              <span className="hidden sm:inline text-muted-foreground/60">·</span>
+              <span className="hidden sm:inline">AYUSH Excellence</span>
             </div>
             <h1 className="font-display text-3xl font-bold leading-tight text-foreground sm:text-5xl lg:leading-[1.15]">
               Clinic Activities, News, Events &amp; Honors
             </h1>
             <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
-              Explore Dr. Rajeev Kumar &amp; ABHI Homeo Hall's journey of healing: free community health camps, national healthcare awards, scientific media features, philanthropic seva drives, and verified recovery milestones across Ranchi, Patna, Kolkata, and Delhi.
+              Explore Dr. Rajeev Kumar &amp; ABHI Homeo Hall's journey of healing: free community
+              health camps, national healthcare awards, scientific media features, philanthropic
+              seva drives, and verified recovery milestones across Ranchi, Patna, Kolkata, and
+              Delhi.
             </p>
 
             {/* 4 Metric Badges Ribbon */}
             <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
               <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm text-center">
-                <span className="font-display text-2xl sm:text-3xl font-bold text-primary">15+</span>
+                <span className="font-display text-2xl sm:text-3xl font-bold text-primary">
+                  15+
+                </span>
                 <p className="mt-1 text-xs font-semibold text-slate-700">Years of Excellence</p>
                 <p className="text-[10px] text-muted-foreground">Estd. 2003 in Ranchi</p>
               </div>
               <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm text-center">
-                <span className="font-display text-2xl sm:text-3xl font-bold text-accent">150+</span>
+                <span className="font-display text-2xl sm:text-3xl font-bold text-accent">
+                  150+
+                </span>
                 <p className="mt-1 text-xs font-semibold text-slate-700">Free Health Camps</p>
                 <p className="text-[10px] text-muted-foreground">Rural &amp; temple seva</p>
               </div>
               <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm text-center">
-                <span className="font-display text-2xl sm:text-3xl font-bold text-emerald-600">25+</span>
+                <span className="font-display text-2xl sm:text-3xl font-bold text-emerald-600">
+                  25+
+                </span>
                 <p className="mt-1 text-xs font-semibold text-slate-700">Media Press Features</p>
                 <p className="text-[10px] text-muted-foreground">National &amp; state journals</p>
               </div>
               <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm text-center">
-                <span className="font-display text-2xl sm:text-3xl font-bold text-amber-500">50,000+</span>
+                <span className="font-display text-2xl sm:text-3xl font-bold text-amber-500">
+                  50,000+
+                </span>
                 <p className="mt-1 text-xs font-semibold text-slate-700">Seva Beneficiaries</p>
                 <p className="text-[10px] text-muted-foreground">Underprivileged families</p>
               </div>
@@ -3398,9 +3812,9 @@ export function ActivitiesPage() {
       </section>
 
       {/* 2. Interactive Section Filter Tabs */}
-      <section className="sticky top-16 z-20 border-b border-border bg-white/95 backdrop-blur-md py-3">
+      <section className="sticky top-14 sm:top-16 z-20 border-b border-border bg-white/95 backdrop-blur-md py-2.5 sm:py-3">
         <div className={wrap}>
-          <div className="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto no-scrollbar py-1">
+          <div className="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto no-scrollbar scroll-smooth px-1 py-1">
             {[
               { id: "All", label: "All Highlights" },
               { id: "News", label: "News & Media" },
@@ -3508,7 +3922,8 @@ export function ActivitiesPage() {
                 </h2>
               </div>
               <p className="text-xs text-muted-foreground sm:text-sm">
-                Active social responsibility drives, free Thursday clinics, and autism educational symposiums.
+                Active social responsibility drives, free Thursday clinics, and autism educational
+                symposiums.
               </p>
             </div>
 
@@ -3535,11 +3950,15 @@ export function ActivitiesPage() {
                     <div className="mt-3 space-y-1.5 text-xs text-muted-foreground">
                       <p className="flex items-center gap-2">
                         <Clock3 size={14} className="text-primary shrink-0" />
-                        <span><strong>Timing:</strong> {event.frequency}</span>
+                        <span>
+                          <strong>Timing:</strong> {event.frequency}
+                        </span>
                       </p>
                       <p className="flex items-center gap-2">
                         <MapPin size={14} className="text-accent shrink-0" />
-                        <span><strong>Location:</strong> {event.location}</span>
+                        <span>
+                          <strong>Location:</strong> {event.location}
+                        </span>
                       </p>
                     </div>
 
@@ -3554,7 +3973,11 @@ export function ActivitiesPage() {
                   </div>
 
                   <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
-                    <Button asChild variant="outline" className="h-9 rounded-xl border-slate-200 text-xs font-bold text-slate-800 hover:bg-slate-50">
+                    <Button
+                      asChild
+                      variant="outline"
+                      className="h-9 rounded-xl border-slate-200 text-xs font-bold text-slate-800 hover:bg-slate-50"
+                    >
                       <Link to="/contact">
                         Inquire About Next Camp <ArrowRight size={13} className="ml-1" />
                       </Link>
@@ -3583,7 +4006,8 @@ export function ActivitiesPage() {
                 Awards &amp; Recognitions
               </h2>
               <p className="mt-2 text-sm text-muted-foreground">
-                Recognized by medical boards, pharmaceutical alliances, and social welfare institutions for excellence in classical AYUSH healthcare.
+                Recognized by medical boards, pharmaceutical alliances, and social welfare
+                institutions for excellence in classical AYUSH healthcare.
               </p>
             </div>
 
@@ -3612,9 +4036,7 @@ export function ActivitiesPage() {
                       {award.title}
                     </h3>
 
-                    <p className="mt-1 text-xs font-semibold text-accent">
-                      {award.organization}
-                    </p>
+                    <p className="mt-1 text-xs font-semibold text-accent">{award.organization}</p>
 
                     <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
                       "{award.citation}"
@@ -3688,16 +4110,16 @@ export function ActivitiesPage() {
                       </span>
                     </div>
                     <div className="absolute bottom-3 left-3 right-3 text-white">
-                      <span className="text-[11px] font-medium opacity-90">{item.location} · {item.date}</span>
+                      <span className="text-[11px] font-medium opacity-90">
+                        {item.location} · {item.date}
+                      </span>
                       <h3 className="font-display text-base font-bold text-white leading-tight">
                         {item.title}
                       </h3>
                     </div>
                   </div>
                   <div className="p-4 bg-white flex-1 flex flex-col justify-between">
-                    <p className="text-xs leading-relaxed text-muted-foreground">
-                      {item.caption}
-                    </p>
+                    <p className="text-xs leading-relaxed text-muted-foreground">{item.caption}</p>
                     <div className="mt-3 flex items-center justify-between border-t border-slate-100 pt-2.5 text-[11px] text-primary font-bold">
                       <span>Documented Activity</span>
                       <span className="text-slate-500 font-normal">ABHI Homeo Hall</span>
@@ -3723,7 +4145,8 @@ export function ActivitiesPage() {
                 Compassionate Healthcare in Action
               </h2>
               <p className="mt-2 text-sm text-muted-foreground">
-                Rooted in deep family values inherited from Late Kamleshwar Prasad, Dr. Rajeev Kumar's mission bridges quality healthcare with selfless public service.
+                Rooted in deep family values inherited from Late Kamleshwar Prasad, Dr. Rajeev
+                Kumar's mission bridges quality healthcare with selfless public service.
               </p>
             </div>
 
@@ -3737,7 +4160,9 @@ export function ActivitiesPage() {
                     Shirdi Sai Baba Seva Movement
                   </h3>
                   <p className="mt-2.5 text-xs leading-relaxed text-muted-foreground">
-                    Every Thursday since 2012, no underprivileged patient is turned away. Fees and medicine costs are entirely condoned. Over 10,000 families across Ranchi have found relief from chronic suffering through this sustained weekly seva.
+                    Every Thursday since 2012, no underprivileged patient is turned away. Fees and
+                    medicine costs are entirely condoned. Over 10,000 families across Ranchi have
+                    found relief from chronic suffering through this sustained weekly seva.
                   </p>
                 </div>
                 <div className="mt-6 border-t border-slate-200/80 pt-4 text-xs font-semibold text-primary">
@@ -3754,7 +4179,9 @@ export function ActivitiesPage() {
                     The ₹100 OPD Pledge
                   </h3>
                   <p className="mt-2.5 text-xs leading-relaxed text-muted-foreground">
-                    In an era where medical consultation fees create economic hardship, Dr. Rajeev's clinics across Ranchi, Patna, Kolkata, and Delhi maintain a fixed ₹100 OPD fee, ensuring top-tier classical homeopathy remains accessible to all.
+                    In an era where medical consultation fees create economic hardship, Dr. Rajeev's
+                    clinics across Ranchi, Patna, Kolkata, and Delhi maintain a fixed ₹100 OPD fee,
+                    ensuring top-tier classical homeopathy remains accessible to all.
                   </p>
                 </div>
                 <div className="mt-6 border-t border-slate-200/80 pt-4 text-xs font-semibold text-accent">
@@ -3771,7 +4198,9 @@ export function ActivitiesPage() {
                     30-Bed Hospital Vision
                   </h3>
                   <p className="mt-2.5 text-xs leading-relaxed text-muted-foreground">
-                    Taking classical homeopathy into mainstream inpatient care, Dr. Rajeev has laid the groundwork for Eastern Zone's first dedicated 30-bed private homeopathic hospital with pathology and comprehensive wellness support.
+                    Taking classical homeopathy into mainstream inpatient care, Dr. Rajeev has laid
+                    the groundwork for Eastern Zone's first dedicated 30-bed private homeopathic
+                    hospital with pathology and comprehensive wellness support.
                   </p>
                 </div>
                 <div className="mt-6 border-t border-slate-200/80 pt-4 text-xs font-semibold text-emerald-700">
@@ -3795,17 +4224,24 @@ export function ActivitiesPage() {
                 Collaborate On A Health Camp Or Consult
               </h3>
               <p className="mt-1 text-sm text-slate-400">
-                Organize a free community health camp with our team, or schedule an in-clinic consultation.
+                Organize a free community health camp with our team, or schedule an in-clinic
+                consultation.
               </p>
             </div>
 
             <div className="flex flex-wrap gap-3">
-              <Button asChild className="h-11 rounded-xl bg-accent px-5 text-xs font-bold text-white shadow-none hover:bg-accent/90">
+              <Button
+                asChild
+                className="h-11 rounded-xl bg-accent px-5 text-xs font-bold text-white shadow-none hover:bg-accent/90"
+              >
                 <Link to="/appointments">
                   Book In-Clinic OPD <ArrowRight size={14} className="ml-1.5" />
                 </Link>
               </Button>
-              <Button asChild className="h-11 rounded-xl bg-emerald-600 px-5 text-xs font-bold text-white shadow-none hover:bg-emerald-700">
+              <Button
+                asChild
+                className="h-11 rounded-xl bg-emerald-600 px-5 text-xs font-bold text-white shadow-none hover:bg-emerald-700"
+              >
                 <a
                   href={`https://wa.me/${whatsappPhone}?text=${encodeURIComponent("Hello Dr. Rajeev's Clinic, I would like to inquire about organizing a community health camp or attending your upcoming activities.")}`}
                   target="_blank"
@@ -3814,7 +4250,11 @@ export function ActivitiesPage() {
                   <MessageCircle size={15} className="mr-2" /> WhatsApp Seva Desk
                 </a>
               </Button>
-              <Button asChild variant="outline" className="h-11 rounded-xl border-slate-700 bg-slate-800 text-xs font-bold text-white shadow-none hover:bg-slate-700">
+              <Button
+                asChild
+                variant="outline"
+                className="h-11 rounded-xl border-slate-700 bg-slate-800 text-xs font-bold text-white shadow-none hover:bg-slate-700"
+              >
                 <a href={`tel:${urgentPhone.replaceAll(" ", "")}`}>
                   <Phone size={14} className="mr-2 text-accent" /> Call Urgent OPD
                 </a>
@@ -3851,15 +4291,21 @@ export function ContactPage() {
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent" />
         <div className={`${wrap} relative`}>
           <div className="mx-auto max-w-3xl text-center">
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-slate-700 shadow-sm">
-              <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>Direct Patient Desk · 4 Metro OPD Centers · 7-Day Care</span>
+            <div className="mb-4 inline-flex max-w-full flex-wrap items-center justify-center gap-1.5 sm:gap-2 rounded-2xl sm:rounded-full border border-slate-200 bg-white px-3 sm:px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-slate-700 shadow-sm">
+              <span className="size-2 shrink-0 rounded-full bg-emerald-500 animate-pulse" />
+              <span>Direct Patient Desk</span>
+              <span className="text-muted-foreground/60">·</span>
+              <span>4 Metro OPD Centers</span>
+              <span className="hidden sm:inline text-muted-foreground/60">·</span>
+              <span className="hidden sm:inline">7-Day Care</span>
             </div>
             <h1 className="font-display text-3xl font-bold leading-tight text-foreground sm:text-5xl lg:leading-[1.15]">
               Connect With Our Medical Care Coordinators
             </h1>
             <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
-              Direct communication channels for our Ranchi, Patna, Kolkata, and Delhi clinics. Consult with senior homeopathic practitioners in person, arrange online case triage, or order genuine medicines from ABHI Homeo Hall.
+              Direct communication channels for our Ranchi, Patna, Kolkata, and Delhi clinics.
+              Consult with senior homeopathic practitioners in person, arrange online case triage,
+              or order genuine medicines from ABHI Homeo Hall.
             </p>
 
             {/* Quick Reassurance Strip */}
@@ -3900,15 +4346,18 @@ export function ContactPage() {
                 </span>
               </div>
               <div className="mt-4">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Urgent OPD Helpline</h3>
-                <p className="mt-1 font-display text-lg font-bold text-foreground">
-                  {urgentPhone}
-                </p>
+                <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                  Urgent OPD Helpline
+                </h3>
+                <p className="mt-1 font-display text-lg font-bold text-foreground">{urgentPhone}</p>
                 <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
                   Immediate phone triage for acute flare-ups and same-day clinic tokens.
                 </p>
               </div>
-              <Button asChild className="mt-4 h-9 w-full rounded-lg bg-accent text-xs font-bold text-white shadow-none hover:bg-accent/90">
+              <Button
+                asChild
+                className="mt-4 h-9 w-full rounded-lg bg-accent text-xs font-bold text-white shadow-none hover:bg-accent/90"
+              >
                 <a href={`tel:${urgentPhone.replaceAll(" ", "")}`}>
                   <Phone size={13} className="mr-1.5" /> Call Helpline
                 </a>
@@ -3926,7 +4375,9 @@ export function ContactPage() {
                 </span>
               </div>
               <div className="mt-4">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">WhatsApp Desk</h3>
+                <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                  WhatsApp Desk
+                </h3>
                 <p className="mt-1 font-display text-lg font-bold text-foreground">
                   +91 {whatsappPhone.slice(2)}
                 </p>
@@ -3934,7 +4385,10 @@ export function ContactPage() {
                   Send previous prescriptions, upload lab reports, or check OPD schedule.
                 </p>
               </div>
-              <Button asChild className="mt-4 h-9 w-full rounded-lg bg-emerald-600 text-xs font-bold text-white shadow-none hover:bg-emerald-700">
+              <Button
+                asChild
+                className="mt-4 h-9 w-full rounded-lg bg-emerald-600 text-xs font-bold text-white shadow-none hover:bg-emerald-700"
+              >
                 <a
                   href={`https://wa.me/${whatsappPhone}?text=${encodeURIComponent("Hello Dr. Rajeev's Clinic, I would like to inquire about consultation and OPD timings.")}`}
                   target="_blank"
@@ -3956,15 +4410,18 @@ export function ContactPage() {
                 </span>
               </div>
               <div className="mt-4">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Medicine Orders</h3>
-                <p className="mt-1 font-display text-lg font-bold text-foreground">
-                  {mainPhone}
-                </p>
+                <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                  Medicine Orders
+                </h3>
+                <p className="mt-1 font-display text-lg font-bold text-foreground">{mainPhone}</p>
                 <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
                   ABHI Homeo Hall authentic German dilutions & pan-India courier delivery.
                 </p>
               </div>
-              <Button asChild className="mt-4 h-9 w-full rounded-lg bg-blue-600 text-xs font-bold text-white shadow-none hover:bg-blue-700">
+              <Button
+                asChild
+                className="mt-4 h-9 w-full rounded-lg bg-blue-600 text-xs font-bold text-white shadow-none hover:bg-blue-700"
+              >
                 <a href={`tel:${mainPhone.replaceAll(" ", "")}`}>
                   <Phone size={13} className="mr-1.5" /> Call Dispensary
                 </a>
@@ -3982,7 +4439,9 @@ export function ContactPage() {
                 </span>
               </div>
               <div className="mt-4">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Case Summaries</h3>
+                <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                  Case Summaries
+                </h3>
                 <p className="mt-1 font-display text-sm font-bold text-foreground break-all">
                   {clinicEmail}
                 </p>
@@ -3990,7 +4449,11 @@ export function ContactPage() {
                   Email diagnostic summaries, second opinions, and medical discharge cards.
                 </p>
               </div>
-              <Button asChild variant="outline" className="mt-4 h-9 w-full rounded-lg border-slate-300 bg-white text-xs font-bold text-slate-800 shadow-none hover:bg-slate-50">
+              <Button
+                asChild
+                variant="outline"
+                className="mt-4 h-9 w-full rounded-lg border-slate-300 bg-white text-xs font-bold text-slate-800 shadow-none hover:bg-slate-50"
+              >
                 <a href={`mailto:${clinicEmail}`}>
                   <Mail size={13} className="mr-1.5" /> Email Care Desk
                 </a>
@@ -4015,7 +4478,8 @@ export function ContactPage() {
                   OPD Clinic Centers
                 </h2>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  Visit any of our 4 fully-equipped clinical centers for in-person consultation, pulse examination, and on-site pharmacy dispensary collection.
+                  Visit any of our 4 fully-equipped clinical centers for in-person consultation,
+                  pulse examination, and on-site pharmacy dispensary collection.
                 </p>
               </div>
 
@@ -4036,7 +4500,10 @@ export function ContactPage() {
                       Affordable Healthcare Pledge & Free Thursday OPD
                     </h4>
                     <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-                      In line with Dr. Rajeev Kumar's philanthropic vision, our standard OPD consultation fee is maintained at just <strong>₹100</strong> across all centers. In devotion to Sai Baba, every Thursday consultations are <strong>100% free</strong> at our Ranchi center for underprivileged families.
+                      In line with Dr. Rajeev Kumar's philanthropic vision, our standard OPD
+                      consultation fee is maintained at just <strong>₹100</strong> across all
+                      centers. In devotion to Sai Baba, every Thursday consultations are{" "}
+                      <strong>100% free</strong> at our Ranchi center for underprivileged families.
                     </p>
                   </div>
                 </div>
@@ -4044,7 +4511,7 @@ export function ContactPage() {
             </div>
 
             {/* Right Column: Confidential Medical Consultation & Inquiry Desk */}
-            <div className="rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 shadow-xl shadow-slate-100">
+            <div className="rounded-3xl border border-slate-200 bg-white p-5 sm:p-8 shadow-xl shadow-slate-100">
               <div className="flex items-center justify-between gap-3 border-b border-border pb-5">
                 <div>
                   <div className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/5 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider text-primary">
@@ -4072,11 +4539,16 @@ export function ContactPage() {
                     Reference Token: {referenceId || "RC-2026-7842"}
                   </p>
                   <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                    Thank you for reaching out. Our clinical case coordinator will review your request and get in touch with you shortly via phone or WhatsApp to finalize your consultation time.
+                    Thank you for reaching out. Our clinical case coordinator will review your
+                    request and get in touch with you shortly via phone or WhatsApp to finalize your
+                    consultation time.
                   </p>
 
                   <div className="mt-6 space-y-2.5">
-                    <Button asChild className="h-11 w-full rounded-xl bg-emerald-600 text-xs font-bold text-white hover:bg-emerald-700">
+                    <Button
+                      asChild
+                      className="h-11 w-full rounded-xl bg-emerald-600 text-xs font-bold text-white hover:bg-emerald-700"
+                    >
                       <a
                         href={`https://wa.me/${whatsappPhone}?text=${encodeURIComponent(`Hi Dr. Rajeev Clinic Desk, I just submitted an inquiry (${referenceId}). Please confirm my consultation.`)}`}
                         target="_blank"
@@ -4161,8 +4633,12 @@ export function ContactPage() {
                         <option value="Ranchi Flagship OPD">Ranchi Flagship OPD (Main Road)</option>
                         <option value="Patna OPD Center">Patna OPD Center (Kankarbagh)</option>
                         <option value="Kolkata OPD Desk">Kolkata OPD Desk (Salt Lake)</option>
-                        <option value="Delhi NCR Consultation Hub">Delhi NCR Consultation Hub (South Ext)</option>
-                        <option value="Online Doctor Review & Courier">Online Doctor Review & Courier</option>
+                        <option value="Delhi NCR Consultation Hub">
+                          Delhi NCR Consultation Hub (South Ext)
+                        </option>
+                        <option value="Online Doctor Review & Courier">
+                          Online Doctor Review & Courier
+                        </option>
                       </select>
                     </div>
 
@@ -4176,21 +4652,34 @@ export function ContactPage() {
                         onChange={(e) => setInquiryType(e.target.value)}
                         className="mt-1.5 h-11 w-full rounded-xl border border-slate-200 bg-slate-50/50 px-3 text-sm text-foreground focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary"
                       >
-                        <option value="General Medical Consultation">General Medical Consultation</option>
-                        <option value="Autism & Pediatric Developmental Care">Autism & Pediatric Care</option>
-                        <option value="Chronic Skin, Eczema & Psoriasis">Chronic Skin & Allergies</option>
-                        <option value="Kidney Stones & Renal Health">Kidney & Gallbladder Stones</option>
+                        <option value="General Medical Consultation">
+                          General Medical Consultation
+                        </option>
+                        <option value="Autism & Pediatric Developmental Care">
+                          Autism & Pediatric Care
+                        </option>
+                        <option value="Chronic Skin, Eczema & Psoriasis">
+                          Chronic Skin & Allergies
+                        </option>
+                        <option value="Kidney Stones & Renal Health">
+                          Kidney & Gallbladder Stones
+                        </option>
                         <option value="Arthritis & Joint Disorders">Joint Pain & Arthritis</option>
-                        <option value="Digestive & Liver Disorders">Digestive & Liver Health</option>
+                        <option value="Digestive & Liver Disorders">
+                          Digestive & Liver Health
+                        </option>
                         <option value="Female Health & PCOD/PCOS">Female Health & PCOD</option>
-                        <option value="ABHI German Medicine Inquiries">ABHI Medicine Order Inquiry</option>
+                        <option value="ABHI German Medicine Inquiries">
+                          ABHI Medicine Order Inquiry
+                        </option>
                       </select>
                     </div>
                   </div>
 
                   <div>
                     <label className="block text-xs font-semibold text-foreground">
-                      Describe Your Symptoms or Medical Concern <span className="text-red-500">*</span>
+                      Describe Your Symptoms or Medical Concern{" "}
+                      <span className="text-red-500">*</span>
                     </label>
                     <Textarea
                       required
@@ -4205,7 +4694,8 @@ export function ContactPage() {
                   <div className="flex items-center gap-2 rounded-xl bg-slate-50 border border-slate-200/80 px-3.5 py-2.5 text-xs text-muted-foreground">
                     <Lock size={14} className="shrink-0 text-slate-500" />
                     <span>
-                      <strong>100% Confidential:</strong> Your medical information is strictly protected and shared only with our attending clinical doctors.
+                      <strong>100% Confidential:</strong> Your medical information is strictly
+                      protected and shared only with our attending clinical doctors.
                     </span>
                   </div>
 
@@ -4234,7 +4724,8 @@ export function ContactPage() {
               What to Expect When Visiting Our Clinics
             </h2>
             <p className="mt-2 text-sm text-muted-foreground">
-              A structured, patient-centric protocol designed to uncover the root cause rather than merely masking symptoms.
+              A structured, patient-centric protocol designed to uncover the root cause rather than
+              merely masking symptoms.
             </p>
           </div>
 
@@ -4251,7 +4742,9 @@ export function ContactPage() {
                 Past Records & Triage
               </h3>
               <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-                Bring your previous doctor prescriptions, lab diagnostics, and blood panels. Our coordinators organize your chronological history before the doctor consultation begins.
+                Bring your previous doctor prescriptions, lab diagnostics, and blood panels. Our
+                coordinators organize your chronological history before the doctor consultation
+                begins.
               </p>
             </div>
 
@@ -4267,7 +4760,8 @@ export function ContactPage() {
                 Constitutional Case Taking
               </h3>
               <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-                A dedicated 30–45 minute consultation exploring the totality of symptoms: physical ailments, emotional stress patterns, thermal sensitivities, and lifestyle factors.
+                A dedicated 30–45 minute consultation exploring the totality of symptoms: physical
+                ailments, emotional stress patterns, thermal sensitivities, and lifestyle factors.
               </p>
             </div>
 
@@ -4283,7 +4777,9 @@ export function ContactPage() {
                 Genuine German Remedies
               </h3>
               <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-                Your tailored remedy is dispensed directly from our licensed ABHI Homeo Hall pharmacy, using certified German-manufactured dilutions with precise dosage guidance.
+                Your tailored remedy is dispensed directly from our licensed ABHI Homeo Hall
+                pharmacy, using certified German-manufactured dilutions with precise dosage
+                guidance.
               </p>
             </div>
           </div>
@@ -4313,7 +4809,10 @@ export function ContactPage() {
                   Do I need to book an appointment before visiting the clinic?
                 </AccordionTrigger>
                 <AccordionContent className="text-sm leading-relaxed text-muted-foreground">
-                  While walk-in patients are accepted at all our centers, we strongly recommend booking a token in advance via our website form, phone helpline, or WhatsApp. This ensures your waiting time is minimized and our senior doctors have your medical history pre-prepared.
+                  While walk-in patients are accepted at all our centers, we strongly recommend
+                  booking a token in advance via our website form, phone helpline, or WhatsApp. This
+                  ensures your waiting time is minimized and our senior doctors have your medical
+                  history pre-prepared.
                 </AccordionContent>
               </AccordionItem>
 
@@ -4322,7 +4821,9 @@ export function ContactPage() {
                   Are Dr. Rajeev's clinics open on Sundays?
                 </AccordionTrigger>
                 <AccordionContent className="text-sm leading-relaxed text-muted-foreground">
-                  Yes, all 4 of our OPD centers in Ranchi, Patna, Kolkata, and Delhi operate 7 days a week, Monday through Sunday from 10:00 AM to 8:00 PM. Weekend slots fill quickly, so booking 1–2 days prior is advised.
+                  Yes, all 4 of our OPD centers in Ranchi, Patna, Kolkata, and Delhi operate 7 days
+                  a week, Monday through Sunday from 10:00 AM to 8:00 PM. Weekend slots fill
+                  quickly, so booking 1–2 days prior is advised.
                 </AccordionContent>
               </AccordionItem>
 
@@ -4331,7 +4832,9 @@ export function ContactPage() {
                   What is Dr. Rajeev's Free Thursday Clinic?
                 </AccordionTrigger>
                 <AccordionContent className="text-sm leading-relaxed text-muted-foreground">
-                  Dr. Rajeev Kumar is an ardent devotee of Shirdi Sai Baba. In service to humanity, he holds completely free consultations every Thursday for underprivileged and needy patients at our Ranchi clinic, along with medicine subsidies.
+                  Dr. Rajeev Kumar is an ardent devotee of Shirdi Sai Baba. In service to humanity,
+                  he holds completely free consultations every Thursday for underprivileged and
+                  needy patients at our Ranchi clinic, along with medicine subsidies.
                 </AccordionContent>
               </AccordionItem>
 
@@ -4340,7 +4843,10 @@ export function ContactPage() {
                   Can I get medicines delivered to my doorstep if I live outside these 4 cities?
                 </AccordionTrigger>
                 <AccordionContent className="text-sm leading-relaxed text-muted-foreground">
-                  Yes! Through ABHI Homeo Hall's centralized distribution network, we safely dispatch authentic German homeopathic remedies, mother tinctures, and customized biochemic compounds across all Indian states and pin codes via express registered courier.
+                  Yes! Through ABHI Homeo Hall's centralized distribution network, we safely
+                  dispatch authentic German homeopathic remedies, mother tinctures, and customized
+                  biochemic compounds across all Indian states and pin codes via express registered
+                  courier.
                 </AccordionContent>
               </AccordionItem>
 
@@ -4349,7 +4855,11 @@ export function ContactPage() {
                   Can homeopathic remedies be taken alongside allopathic medicines?
                 </AccordionTrigger>
                 <AccordionContent className="text-sm leading-relaxed text-muted-foreground">
-                  Yes. Classical homeopathic medicines work on the organism's vital bio-regulatory force and do not interfere with conventional allopathic pharmaceuticals. Patients should maintain a 30-minute interval between medicines and never abruptly stop essential chronic medications (e.g. insulin or cardiac drugs) without their doctor's supervision.
+                  Yes. Classical homeopathic medicines work on the organism's vital bio-regulatory
+                  force and do not interfere with conventional allopathic pharmaceuticals. Patients
+                  should maintain a 30-minute interval between medicines and never abruptly stop
+                  essential chronic medications (e.g. insulin or cardiac drugs) without their
+                  doctor's supervision.
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
@@ -4369,17 +4879,24 @@ export function ContactPage() {
                 Need Prompt Clinical Guidance Today?
               </h3>
               <p className="mt-1 text-sm text-slate-400">
-                Our senior patient care coordinator is ready to answer your questions and route your case.
+                Our senior patient care coordinator is ready to answer your questions and route your
+                case.
               </p>
             </div>
 
             <div className="flex flex-wrap gap-3">
-              <Button asChild className="h-11 rounded-xl bg-accent px-5 text-xs font-bold text-white shadow-none hover:bg-accent/90">
+              <Button
+                asChild
+                className="h-11 rounded-xl bg-accent px-5 text-xs font-bold text-white shadow-none hover:bg-accent/90"
+              >
                 <a href={`tel:${urgentPhone.replaceAll(" ", "")}`}>
                   <Phone size={15} className="mr-2" /> Call Urgent Desk
                 </a>
               </Button>
-              <Button asChild className="h-11 rounded-xl bg-emerald-600 px-5 text-xs font-bold text-white shadow-none hover:bg-emerald-700">
+              <Button
+                asChild
+                className="h-11 rounded-xl bg-emerald-600 px-5 text-xs font-bold text-white shadow-none hover:bg-emerald-700"
+              >
                 <a
                   href={`https://wa.me/${whatsappPhone}?text=${encodeURIComponent("Hello Dr. Rajeev's Clinic, I need assistance with consultation scheduling.")}`}
                   target="_blank"
@@ -4417,19 +4934,28 @@ export function AutismBookPage() {
               Empowering Families with Knowledge &amp; Compassion
             </h2>
             <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
-              Learn about holistic homeopathic approaches, behavioral and dietary observation, and constructive home support strategies. The book serves as an educational companion alongside specialized developmental therapy.
+              Learn about holistic homeopathic approaches, behavioral and dietary observation, and
+              constructive home support strategies. The book serves as an educational companion
+              alongside specialized developmental therapy.
             </p>
             <div className="flex flex-wrap gap-3 pt-2">
-              <Button asChild className="bg-accent text-accent-foreground font-bold hover:bg-accent/90 shadow-md">
+              <Button
+                asChild
+                className="bg-accent text-accent-foreground font-bold hover:bg-accent/90 shadow-md"
+              >
                 <a href="https://shop.rajeevclinic.com" target="_blank" rel="noreferrer">
                   <ShoppingBag className="size-4 mr-1.5" />
                   Order Book from Shop
                 </a>
               </Button>
-              <Button asChild variant="outline" className="border-slate-300 bg-white text-slate-800 hover:bg-slate-100">
+              <Button
+                asChild
+                variant="outline"
+                className="border-slate-300 bg-white text-slate-800 hover:bg-slate-100"
+              >
                 <a
                   href={`https://wa.me/${whatsappPhone}?text=${encodeURIComponent(
-                    "Hello Dr. Rajeev's Clinic, I would like to inquire about ordering the Autism Care Book."
+                    "Hello Dr. Rajeev's Clinic, I would like to inquire about ordering the Autism Care Book.",
                   )}`}
                   target="_blank"
                   rel="noreferrer"
@@ -4457,12 +4983,17 @@ export function SheChildCarePage() {
       <section className={section}>
         <div className={`${wrap} grid gap-12 lg:grid-cols-[1fr_.85fr]`}>
           <div className="space-y-6">
-            <h2 className="font-display text-2xl font-bold sm:text-3xl">Care Shaped Around Family Life</h2>
+            <h2 className="font-display text-2xl font-bold sm:text-3xl">
+              Care Shaped Around Family Life
+            </h2>
             <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
-              Women's hormonal health, menstrual irregularities, PCOD/PCOS, and pediatric complaints like recurring childhood coughs, allergies, and dentition troubles require patient, constitutional consideration rather than aggressive chemical suppression.
+              Women's hormonal health, menstrual irregularities, PCOD/PCOS, and pediatric complaints
+              like recurring childhood coughs, allergies, and dentition troubles require patient,
+              constitutional consideration rather than aggressive chemical suppression.
             </p>
             <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
-              Our clinical team conducts empathetic, confidential consultations in a comfortable environment for mothers, young women, and children.
+              Our clinical team conducts empathetic, confidential consultations in a comfortable
+              environment for mothers, young women, and children.
             </p>
             <div className="pt-2">
               <PrimaryLink to="/appointments">
@@ -4473,7 +5004,9 @@ export function SheChildCarePage() {
           </div>
 
           <div className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-xs">
-            <h3 className="font-display text-xl font-bold text-foreground">Common Areas of Focus</h3>
+            <h3 className="font-display text-xl font-bold text-foreground">
+              Common Areas of Focus
+            </h3>
             <ul className="mt-5 space-y-3 text-sm text-muted-foreground">
               {[
                 "PCOD / PCOS and Menstrual Cycle Harmony",
@@ -4551,13 +5084,22 @@ export function PolicyPage({ policy }: { policy: "privacy" | "terms" | "refund" 
   const content = policyCopy[policy];
   return (
     <SiteFrame>
-      <PageIntro eyebrow="Legal & Administrative" title={content.title} description={content.description} />
+      <PageIntro
+        eyebrow="Legal & Administrative"
+        title={content.title}
+        description={content.description}
+      />
       <section className={section}>
         <div className={`${wrap} max-w-4xl space-y-8`}>
           {content.sections.map((sec) => (
-            <div key={sec.heading} className="rounded-2xl border border-border bg-card p-6 shadow-xs sm:p-8">
+            <div
+              key={sec.heading}
+              className="rounded-2xl border border-border bg-card p-6 shadow-xs sm:p-8"
+            >
               <h2 className="font-display text-xl font-bold text-foreground">{sec.heading}</h2>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">{sec.body}</p>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
+                {sec.body}
+              </p>
             </div>
           ))}
         </div>

@@ -1,4 +1,5 @@
 <!-- LOVABLE:BEGIN -->
+
 > [!IMPORTANT]
 > This project is connected to [Lovable](https://lovable.dev). Avoid rewriting
 > published git history — force pushing, or rebasing/amending/squashing commits
@@ -27,8 +28,10 @@ use the editor.
   `LOVABLE_API_KEY`. When Lovable does not provide one, users can bring their
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
+
 <!-- LOVABLE:END -->
 
 ## Project architecture
+
 - Keep public content in `src/data/*.ts`, shared site chrome and reusable UI in `src/components/`, and pages in TanStack Start file-based routes; this keeps clinic facts editable and navigation consistent.
 - Keep route files focused on URL matching and metadata; implement reusable page views in `src/components/site-pages.tsx` to share layouts and interaction patterns.
